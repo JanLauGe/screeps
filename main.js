@@ -27,6 +27,7 @@ var roleTank = require('role.tank');
 
 // JSON.stringify
 // Game.spawns.Spawn1.createWarrior()
+// Test msg
 
 module.exports.loop = function () {
 
