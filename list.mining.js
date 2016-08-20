@@ -13,6 +13,61 @@ var listRemotemining = {
         }
 
 
+        // Run remote mining
+        for(var i in Game.flags) {
+            if (i.substring(0, 6) == 'mining') {
+
+                var operation = i.substring(8, 15)
+                Game.flags[i].memory.operation = operation
+
+                // Find closest spawn
+                var distanceToSpawn = Infinity
+                for(j in Game.spawns) {
+                    var thisDistance = Game.map.findRoute(
+                        Game.spawns[j].room.name,
+                        Game.flags[i].pos.roomName).length
+                    if (thisDistance < distanceToSpawn) {
+                        var distanceToSpawn = thisDistance
+                        var closestSpawn = Game.spawns[j]
+                    }
+                }
+                Game.flags[i].memory.spawn = closestSpawn.id
+
+                // Old approach using global memory
+                if (typeof Game.flags[i].room !== 'undefined') {
+                    Memory.global.remoteminig.openrooms.push(Game.flags[i].pos.roomName)
+
+                    // Get all visible sources
+                    var sources = Game.flags[i].room.find(FIND_SOURCES)
+                    for(i = 0; i < sources.length; i++) {
+                      var source = sources[i]
+                      Memory.global.remotemining.sources.push(source.id)
+                    }
+
+                    // Get all hostiles
+                    var hostiles = Game.flags[i].room.find(FIND_HOSTILE_CREEPS)
+                    for(i = 0; i < hostiles.length; i++) {
+                      var hostile = hostiles[i]
+                      Memory.global.remotemining.hostiles.push(hostile.id)
+                    }
+                }
+
+                else if(typeof Game.flags[i].room === 'undefined') {
+                    console.log('No creep in room ' + Game.flags[i].pos.roomName)
+                    Memory.global.remoteminig.closedrooms.push(Game.flags[i].pos.roomName)
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
+
         // list of sources to be mined
         for(var i in Game.flags){
             if (i.substring(0, 6) == 'mining') {

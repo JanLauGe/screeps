@@ -61,7 +61,7 @@ var buildCreeps = {
 
         StructureSpawn.prototype.createTest = function() {
             return this.createCreep(bodySize([MOVE,WORK,CARRY]), Spawn.prototype.getCreepName('dolly'),
-            {role: 'test', serial: Spawn.prototype.getSerial('test'), target: undefined});};
+            {role: 'test', serial: Spawn.prototype.getSerial('test')});};
 
 
         // // To recover from zero harvester low energy scenario:
@@ -83,16 +83,16 @@ var buildCreeps = {
 
         StructureSpawn.prototype.createConqueror = function() {
             return this.createCreep([MOVE,CLAIM], Spawn.prototype.getCreepName('conqueror'),
-            {role: 'conqueror', serial: Spawn.prototype.getSerial('conqueror'), target: undefined});};
+            {role: 'conqueror', serial: Spawn.prototype.getSerial('conqueror')});};
         StructureSpawn.prototype.createPioneer = function() {
             return this.createCreep([MOVE,MOVE,MOVE,MOVE,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY], Spawn.prototype.getCreepName('pioneer'),
-            {role: 'pioneer', serial: Spawn.prototype.getSerial('pioneer'), target: undefined});};
+            {role: 'pioneer', serial: Spawn.prototype.getSerial('pioneer')});};
         // StructureSpawn.prototype.createWarrior = function() {
         //     return this.createCreep([MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK],
-        //     Spawn.prototype.getCreepName('warrior'), {role: 'warrior', serial: Spawn.prototype.getSerial('warrior'), target: undefined});};
+        //     Spawn.prototype.getCreepName('warrior'), {role: 'warrior', serial: Spawn.prototype.getSerial('warrior')});};
         StructureSpawn.prototype.createWarrior = function() {
             return this.createCreep([MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,HEAL],
-            Spawn.prototype.getCreepName('warrior'), {role: 'warrior', serial: Spawn.prototype.getSerial('warrior'), target: undefined});};
+            Spawn.prototype.getCreepName('warrior'), {role: 'warrior', serial: Spawn.prototype.getSerial('warrior')});};
         StructureSpawn.prototype.createArcher = function() {
             return this.createCreep([MOVE,MOVE,MOVE,MOVE,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK,RANGED_ATTACK],
             Spawn.prototype.getCreepName('archer'), {role: 'archer', serial: Spawn.prototype.getSerial('archer')});};
@@ -116,28 +116,28 @@ var buildCreeps = {
         if (EnergyCapacity < 400) {
             StructureSpawn.prototype.createGeneralist = function() {
                 return this.createCreep([MOVE,MOVE,WORK,WORK,CARRY,CARRY], Spawn.prototype.getCreepName('generalist'),
-                {role: 'generalist', serial: Spawn.prototype.getSerial('generalist'), target: undefined});};
+                {role: 'generalist', serial: Spawn.prototype.getSerial('generalist')});};
             StructureSpawn.prototype.createBuilder = function() {
                 return this.createCreep([MOVE,WORK,CARRY,CARRY], Spawn.prototype.getCreepName('builder'),
-                {role: 'builder', serial: Spawn.prototype.getSerial('builder'), target: undefined});};
+                {role: 'builder', serial: Spawn.prototype.getSerial('builder')});};
         }
         else if (EnergyCapacity < 800) {
             StructureSpawn.prototype.createGeneralist = function() {
                 return this.createCreep([MOVE,MOVE,WORK,WORK,CARRY,CARRY], Spawn.prototype.getCreepName('generalist'),
-                {role: 'generalist', serial: Spawn.prototype.getSerial('generalist'), target: undefined});};
+                {role: 'generalist', serial: Spawn.prototype.getSerial('generalist')});};
             StructureSpawn.prototype.createBuilder = function() {
                 return this.createCreep([MOVE,MOVE,WORK,WORK,CARRY,CARRY], Spawn.prototype.getCreepName('builder'),
-                {role: 'builder', serial: Spawn.prototype.getSerial('builder'), target: undefined});};
+                {role: 'builder', serial: Spawn.prototype.getSerial('builder')});};
 
             StructureSpawn.prototype.createWorker = function() {
                 return this.createCreep([MOVE,WORK,WORK,WORK,WORK,CARRY,CARRY], Spawn.prototype.getCreepName('worker'),
-                {role: 'worker', serial: Spawn.prototype.getSerial('worker'), target: undefined});};
+                {role: 'worker', operation: NULL, target: NULL, serial: Spawn.prototype.getSerial('worker')});};
             StructureSpawn.prototype.createCarrier = function() {
                 return this.createCreep([MOVE,MOVE,CARRY,CARRY,CARRY,CARRY], Spawn.prototype.getCreepName('carrier'),
-                {role: 'carrier', serial: Spawn.prototype.getSerial('carrier'), task: 'pickup', target: undefined});};
+                {role: 'carrier', serial: Spawn.prototype.getSerial('carrier')});};
             StructureSpawn.prototype.createUpgrader = function() {
                 return this.createCreep([MOVE,WORK,WORK,WORK,WORK,CARRY,CARRY], Spawn.prototype.getCreepName('upgrader'),
-                {role: 'upgrader', serial: Spawn.prototype.getSerial('upgrader'), target: undefined});};
+                {role: 'upgrader', serial: Spawn.prototype.getSerial('upgrader')});};
         }
         else if(EnergyCapacity >= 800 && EnergyCapacity < 1300) {
             StructureSpawn.prototype.createHarvester = function() {
@@ -146,16 +146,16 @@ var buildCreeps = {
                 return this.createCreep([MOVE,MOVE,MOVE,MOVE,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], Spawn.prototype.getCreepName('builder'), {role: 'builder'});};
             StructureSpawn.prototype.createGeneralist = function() {
                 return this.createCreep([MOVE,MOVE,MOVE,MOVE,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY], Spawn.prototype.getCreepName('pioneer'),
-                {role: 'pioneer', serial: Spawn.prototype.getSerial('pioneer'), target: undefined});};
+                {role: 'pioneer', serial: Spawn.prototype.getSerial('pioneer')});};
             StructureSpawn.prototype.createWorker = function() {
                 return this.createCreep([MOVE,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY], Spawn.prototype.getCreepName('worker'),
-                {role: 'worker', serial: Spawn.prototype.getSerial('worker'), target: undefined});};
+                {role: 'worker', operation: NULL, target: NULL, serial: Spawn.prototype.getSerial('worker')});};
             StructureSpawn.prototype.createCarrier = function() {
                 return this.createCreep([MOVE,MOVE,MOVE,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], Spawn.prototype.getCreepName('carrier'),
-                {role: 'carrier', serial: Spawn.prototype.getSerial('carrier'), task: 'pickup', target: undefined});};
+                {role: 'carrier', serial: Spawn.prototype.getSerial('carrier')});};
             StructureSpawn.prototype.createUpgrader = function() {
                 return this.createCreep([MOVE,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY], Spawn.prototype.getCreepName('upgrader'),
-                {role: 'upgrader', serial: Spawn.prototype.getSerial('upgrader'), target: undefined});};
+                {role: 'upgrader', serial: Spawn.prototype.getSerial('upgrader')});};
         }
         else if(EnergyCapacity >= 1300 && EnergyCapacity < 1800) {
             StructureSpawn.prototype.createHarvester = function() {
@@ -164,13 +164,13 @@ var buildCreeps = {
                 return this.createCreep([MOVE,MOVE,MOVE,MOVE,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], Spawn.prototype.getCreepName('builder'), {role: 'builder'});};
             StructureSpawn.prototype.createWorker = function() {
                 return this.createCreep([MOVE,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], Spawn.prototype.getCreepName('worker'),
-                {role: 'worker', serial: Spawn.prototype.getSerial('worker'), target: undefined});};
+                {role: 'worker', operation: NULL, target: NULL, serial: Spawn.prototype.getSerial('worker')});};
             StructureSpawn.prototype.createCarrier = function() {
                 return this.createCreep([MOVE,MOVE,MOVE,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], Spawn.prototype.getCreepName('carrier'),
-                {role: 'carrier', serial: Spawn.prototype.getSerial('carrier'), task: 'pickup', target: undefined});};
+                {role: 'carrier', serial: Spawn.prototype.getSerial('carrier')});};
             StructureSpawn.prototype.createUpgrader = function() {
                 return this.createCreep([MOVE,MOVE,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], Spawn.prototype.getCreepName('upgrader'),
-                {role: 'upgrader', serial: Spawn.prototype.getSerial('upgrader'), target: undefined});};
+                {role: 'upgrader', serial: Spawn.prototype.getSerial('upgrader')});};
         }
         else if(EnergyCapacity >= 1800) {
             StructureSpawn.prototype.createHarvester = function() {
@@ -179,13 +179,13 @@ var buildCreeps = {
                 return this.createCreep([MOVE,MOVE,MOVE,MOVE,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], Spawn.prototype.getCreepName('builder'), {role: 'builder'});};
             StructureSpawn.prototype.createWorker = function() {
                 return this.createCreep([MOVE,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], Spawn.prototype.getCreepName('worker'),
-                {role: 'worker', serial: Spawn.prototype.getSerial('worker'), target: undefined});};
+                {role: 'worker', operation: NULL, target: NULL, serial: Spawn.prototype.getSerial('worker')});};
             StructureSpawn.prototype.createCarrier = function() {
                 return this.createCreep([MOVE,MOVE,MOVE,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], Spawn.prototype.getCreepName('carrier'),
-                {role: 'carrier', serial: Spawn.prototype.getSerial('carrier'), task: 'pickup', target: undefined});};
+                {role: 'carrier', serial: Spawn.prototype.getSerial('carrier')});};
             StructureSpawn.prototype.createUpgrader = function() {
                 return this.createCreep([MOVE,MOVE,MOVE,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], Spawn.prototype.getCreepName('upgrader'),
-                {role: 'upgrader', serial: Spawn.prototype.getSerial('upgrader'), target: undefined});};
+                {role: 'upgrader', serial: Spawn.prototype.getSerial('upgrader')});};
         }
         else if(EnergyCapacity >= 2300) {
             StructureSpawn.prototype.createHealer = function() {

@@ -67,7 +67,7 @@ var roomSettings4 = {
     'creeps_generalists' : 0,
     'creeps_workers' : 2,
     'creeps_carriers' : 2,
-    'creeps_builders' : 0,
+    'creeps_builders' : 1,
     'creeps_upgraders' : 1,
 
     'creeps_warriors' : 0,
@@ -87,7 +87,7 @@ var roomSettings5 = {
     'creeps_generalists' : 0,
     'creeps_workers' : 2,
     'creeps_carriers' : 2,
-    'creeps_builders' : 0,
+    'creeps_builders' : 1,
     'creeps_upgraders' : 1,
 
     'creeps_warriors' : 0,

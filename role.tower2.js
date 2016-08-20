@@ -2,11 +2,16 @@ var roleTower2 = {
 
     run: function(tower) {
 
+        var towerrange =  12
+
         if (tower.room == 'E46N42') {
             var towermode = 'holdfire'
         }
+        else if(tower.room == 'E47N45') {
+            var towermode = 'holdfire'
+        }
         else {
-            var towermode = 'fireatwill'
+            var towermode = 'holdfire'
         }
         excludedplayers = ['JanLauGe', 'linucc', 'MyFriends']
 
@@ -18,7 +23,7 @@ var roleTower2 = {
         if (towermode == 'holdfire') {
             var hostiles = tower.room.find(FIND_HOSTILE_CREEPS, {
                 filter: (hostile) => {return (
-                    tower.pos.getRangeTo(hostile) <= 12
+                    tower.pos.getRangeTo(hostile) <= towerrange
                     && !excludedplayers.includes(hostile.owner.username))}})
         }
         else if(towermode == 'fireatwill') {

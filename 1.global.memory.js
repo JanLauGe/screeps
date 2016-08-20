@@ -27,6 +27,13 @@ var globalMemory = {
             }
         }
 
+        // Set up memory for remote mining
+        Memory.global.remotemining = [];
+        Memory.global.remotemining.openrooms [];
+        Memory.global.remotemining.sources [];
+        Memory.global.remotemining.hostiles [];
+        Memory.global.remotemining.closedrooms [];
+
         // Get number of active creeps per role
         Memory.global.creeps.generalists = [];
         Memory.global.creeps.workers = [];

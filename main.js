@@ -4,6 +4,8 @@ var spawnCreeps = require('3.spawn.creeps');
 
 var setupMemory = require('aa.setup.memory');
 var buildCreeps = require('bb.build.creeps');
+var listSpawning = require('list.spawning');
+var listMining = require('list.minig');
 var listJobs = require('list.jobs');
 var timedAttack = require('timed.attack')
 var roleTower2 = require('role.tower2')
@@ -33,15 +35,8 @@ module.exports.loop = function () {
 
     globalMemory.run()
     timedAttack.run()
-
-    // Run remote mining
-    for(var i in Game.flags){
-        if (i.substring(0, 6) == 'mining') {
-            console.log('Mining in room ' + Game.flags[i].room.name)
-            var hostiles = Game.flags[i].room.find(FIND_HOSTILE_CREEPS)
-            var sources = Game.flags[i].room.find(FIND_SOURCES)
-        }
-    }
+    listMining.run()
+    listSpawning.run()
 
     // Run rooms
     for(r in Game.rooms) {

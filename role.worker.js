@@ -3,6 +3,7 @@ var roleWorker = {
     run: function(creep) {
 
         function isOdd(num) { return num % 2;}
+        
         var serial = creep.memory.serial;
         var targets = creep.room.find(FIND_SOURCES)
         if (isOdd(serial) == 0) {
