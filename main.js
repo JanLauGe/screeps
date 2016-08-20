@@ -7,7 +7,7 @@ var setupRoom = require('setup.room')
 var stats = require('stats')
 
 var listSpawning = require('list.spawning');
-var listMining = require('list.mining');
+//var listMining = require('list.mining');
 var listJobs = require('list.jobs');
 
 var runFlags = require('run.flags')

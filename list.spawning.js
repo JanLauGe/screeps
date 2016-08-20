@@ -17,8 +17,6 @@ var listSpawning = {
         needsSpawning(thisroom, 'worker')
         needsSpawning(thisroom, 'builder')
         needsSpawning(thisroom, 'upgrader')
-
-        console.log(Mempath.spawningQueue)
     }
 };
 

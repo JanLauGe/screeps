@@ -48,15 +48,6 @@ var listMining = {
             }
         }
 
-
-
-
-
-
-
-
-
-
         // list of sources to be mined
         for(var i in Game.flags){
             if (i.substring(0, 6) == 'mining') {

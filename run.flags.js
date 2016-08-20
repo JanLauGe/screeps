@@ -10,11 +10,9 @@ var runFlags = {
             if (creep.memory.role == 'worker') {
                 if (typeof creep.memory.operation !== 'undefined') {
                     operations.push(creep.memory.operation)
-                    console.log(operations)
                 }
                 if (typeof creep.memory.target !== 'undefined') {
                     targets.push(creep.memory.target)
-                    console.log(targets)
                 }
             }
         }

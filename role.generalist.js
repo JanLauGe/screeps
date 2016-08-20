@@ -2,8 +2,6 @@ var roleGeneralist = {
 
     run: function(creep) {
 
-        // console.log(creep.body.indexOf('WORK'))
-
         // ## Variable definition:
         // Find the spawn in this room
         var spawn = creep.room.find(FIND_MY_STRUCTURES, {
