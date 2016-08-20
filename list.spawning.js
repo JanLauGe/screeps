@@ -1,9 +1,9 @@
 var listSpawning = {
 
-    run: function(thisspawn) {
+    run: function(thisroom) {
 
-        //var Mempath = Memory.byroom[thisroom.name]
-        var Mempath = Memory.byroom[thisspawn.room.name]
+        var Mempath = Memory.byroom[thisroom.name]
+        Mempath.spawningQueue = []
 
         // Custom function for array duplicates
         function contains(a, obj) {
@@ -17,24 +17,19 @@ var listSpawning = {
 
         // Compare number of creeps to settings
         function needsSpawning(thisroom, creeprole) {
-            var Mempath = Memory.byroom[thisroom]
             if (Mempath.creeps[creeprole + 's'].length < Mempath.settings['creeps_' + creeprole + 's']) {
-                return(creeprole)
-            }
-            else {
-                return
+                Mempath.spawningQueue.push(creeprole)
             }
         }
 
-        // Create spawning queue
-        var spawningQueue = []
-        spawningQueue.push(thisroom, 'generalist')
-        spawningQueue.push(thisroom, 'carrier')
-        spawningQueue.push(thisroom, 'worker')
-        spawningQueue.push(thisroom, 'builder')
-        spawningQueue.push(thisroom, 'upgrader')
 
-        console.log(spawningQueue)
+        needsSpawning(thisroom, 'generalist')
+        needsSpawning(thisroom, 'carrier')
+        needsSpawning(thisroom, 'worker')
+        needsSpawning(thisroom, 'builder')
+        needsSpawning(thisroom, 'upgrader')
+
+        console.log(Mempath.spawningQueue)
     }
 };
 

@@ -1,4 +1,4 @@
-var listRemotemining = {
+var listMining = {
 
     run: function() {
 
@@ -11,7 +11,6 @@ var listRemotemining = {
             }
             return false;
         }
-
 
         // Run remote mining
         for(var i in Game.flags) {
@@ -35,26 +34,26 @@ var listRemotemining = {
 
                 // Old approach using global memory
                 if (typeof Game.flags[i].room !== 'undefined') {
-                    Memory.global.remoteminig.openrooms.push(Game.flags[i].pos.roomName)
+                    Memory.global.mining.openrooms.push(Game.flags[i].pos.roomName)
 
                     // Get all visible sources
                     var sources = Game.flags[i].room.find(FIND_SOURCES)
                     for(i = 0; i < sources.length; i++) {
                       var source = sources[i]
-                      Memory.global.remotemining.sources.push(source.id)
+                      Memory.global.mining.sources.push(source.id)
                     }
 
                     // Get all hostiles
                     var hostiles = Game.flags[i].room.find(FIND_HOSTILE_CREEPS)
                     for(i = 0; i < hostiles.length; i++) {
                       var hostile = hostiles[i]
-                      Memory.global.remotemining.hostiles.push(hostile.id)
+                      Memory.global.mining.hostiles.push(hostile.id)
                     }
                 }
 
                 else if(typeof Game.flags[i].room === 'undefined') {
                     console.log('No creep in room ' + Game.flags[i].pos.roomName)
-                    Memory.global.remoteminig.closedrooms.push(Game.flags[i].pos.roomName)
+                    Memory.global.mining.closedrooms.push(Game.flags[i].pos.roomName)
                 }
             }
         }
@@ -227,4 +226,4 @@ var listRemotemining = {
     }
 };
 
-module.exports = listRemotemining;
+module.exports = listMining;

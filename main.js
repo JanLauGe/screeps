@@ -5,7 +5,7 @@ var spawnCreeps = require('3.spawn.creeps');
 var setupMemory = require('aa.setup.memory');
 var buildCreeps = require('bb.build.creeps');
 var listSpawning = require('list.spawning');
-var listMining = require('list.minig');
+var listMining = require('list.mining');
 var listJobs = require('list.jobs');
 var timedAttack = require('timed.attack')
 var roleTower2 = require('role.tower2')
@@ -36,7 +36,6 @@ module.exports.loop = function () {
     globalMemory.run()
     timedAttack.run()
     listMining.run()
-    listSpawning.run()
 
     // Run rooms
     for(r in Game.rooms) {
@@ -49,9 +48,12 @@ module.exports.loop = function () {
             if (thisroom.controller.owner.username === 'JanLauGe'){
 
                 var thisroom = Game.rooms[r];
+
                 Memory.byroom[thisroom.name] == {};
                 // Set up room memory
                 roomMemory.run(thisroom)
+                // List of spawning
+                listSpawning.run(thisroom)
                 // List of jobs
                 listJobs.run(thisroom)
                 // Spawn creeps

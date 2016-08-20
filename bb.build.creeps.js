@@ -13,7 +13,7 @@ var buildCreeps = {
             var creepName = role + '_0';
             for(i = 0; i < 9999 ; i++) {
                 creepName = role + '_' + i;
-                if (Game.creeps[creepName] === undefined || Game.creeps[creepName] === null) break;
+                if (Game.creeps[creepName] === undefined || Game.creeps[creepName] === 'none') break;
             }
             return creepName;
         }
@@ -131,7 +131,7 @@ var buildCreeps = {
 
             StructureSpawn.prototype.createWorker = function() {
                 return this.createCreep([MOVE,WORK,WORK,WORK,WORK,CARRY,CARRY], Spawn.prototype.getCreepName('worker'),
-                {role: 'worker', operation: NULL, target: NULL, serial: Spawn.prototype.getSerial('worker')});};
+                {role: 'worker', operation: 'none', target: 'none', serial: Spawn.prototype.getSerial('worker')});};
             StructureSpawn.prototype.createCarrier = function() {
                 return this.createCreep([MOVE,MOVE,CARRY,CARRY,CARRY,CARRY], Spawn.prototype.getCreepName('carrier'),
                 {role: 'carrier', serial: Spawn.prototype.getSerial('carrier')});};
@@ -149,7 +149,7 @@ var buildCreeps = {
                 {role: 'pioneer', serial: Spawn.prototype.getSerial('pioneer')});};
             StructureSpawn.prototype.createWorker = function() {
                 return this.createCreep([MOVE,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY], Spawn.prototype.getCreepName('worker'),
-                {role: 'worker', operation: NULL, target: NULL, serial: Spawn.prototype.getSerial('worker')});};
+                {role: 'worker', operation: 'none', target: 'none', serial: Spawn.prototype.getSerial('worker')});};
             StructureSpawn.prototype.createCarrier = function() {
                 return this.createCreep([MOVE,MOVE,MOVE,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], Spawn.prototype.getCreepName('carrier'),
                 {role: 'carrier', serial: Spawn.prototype.getSerial('carrier')});};
@@ -164,7 +164,7 @@ var buildCreeps = {
                 return this.createCreep([MOVE,MOVE,MOVE,MOVE,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], Spawn.prototype.getCreepName('builder'), {role: 'builder'});};
             StructureSpawn.prototype.createWorker = function() {
                 return this.createCreep([MOVE,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], Spawn.prototype.getCreepName('worker'),
-                {role: 'worker', operation: NULL, target: NULL, serial: Spawn.prototype.getSerial('worker')});};
+                {role: 'worker', operation: 'none', target: 'none', serial: Spawn.prototype.getSerial('worker')});};
             StructureSpawn.prototype.createCarrier = function() {
                 return this.createCreep([MOVE,MOVE,MOVE,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], Spawn.prototype.getCreepName('carrier'),
                 {role: 'carrier', serial: Spawn.prototype.getSerial('carrier')});};
@@ -179,7 +179,7 @@ var buildCreeps = {
                 return this.createCreep([MOVE,MOVE,MOVE,MOVE,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], Spawn.prototype.getCreepName('builder'), {role: 'builder'});};
             StructureSpawn.prototype.createWorker = function() {
                 return this.createCreep([MOVE,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], Spawn.prototype.getCreepName('worker'),
-                {role: 'worker', operation: NULL, target: NULL, serial: Spawn.prototype.getSerial('worker')});};
+                {role: 'worker', operation: 'none', target: 'none', serial: Spawn.prototype.getSerial('worker')});};
             StructureSpawn.prototype.createCarrier = function() {
                 return this.createCreep([MOVE,MOVE,MOVE,MOVE,MOVE,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY], Spawn.prototype.getCreepName('carrier'),
                 {role: 'carrier', serial: Spawn.prototype.getSerial('carrier')});};
