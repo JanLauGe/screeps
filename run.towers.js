@@ -18,13 +18,14 @@ var runTowers = {
         // Put players on this list to avoid friendly fire§
         excludedplayers = ['JanLauGe', 'linucc', 'MyFriends']
 
-        var Mempath = Memory.byroom[tower.room.name]
+        var Mempath = Memory.byroom[towers[0].room.name]
         var jobRamps = Mempath.jobs.upkeep.ramps;
         var jobRoads = Mempath.jobs.upkeep.roads;
         var jobConts = Mempath.jobs.upkeep.conts;
         var jobWalls = Mempath.jobs.upkeep.walls;
 
-        for(tower in towers) {
+        for(i in towers) {
+            var tower = towers[i]
             if (towermode == 'holdfire') {
                 var hostiles = tower.room.find(FIND_HOSTILE_CREEPS, {
                     filter: (hostile) => {return (

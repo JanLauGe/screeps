@@ -22,7 +22,7 @@ var roleUpgrader = require('role.upgrader');
 
 module.exports.loop = function () {
 
-    setupMemory.run()
+    //setupMemory.run()
 
     //## RUN ROOMS -------------------------------------------------------------
     for(r in Game.rooms) {
@@ -49,6 +49,7 @@ module.exports.loop = function () {
                 runLinks.run(links)
 
                 // Alarm if enemy enters room
+                var hostiles = thisroom.find(FIND_HOSTILE_CREEPS)
                 if (hostiles.length > 0) {
                     var username = hostiles[0].owner.username;
                     Game.notify(`User ${hostiles[0].owner.username} spotted in room ${thisroom.name}`);
