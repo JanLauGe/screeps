@@ -56,7 +56,7 @@ var functions = {
         }
 
         // Function for spawning a carrier
-        StructureSpawn.prototype.spawnCarrier = function(energy) {
+        StructureSpawn.prototype.spawnCarrier = function(energy, operation, target) {
             var body = [];
             var numberOfSegments = Math.floor(energy / 100);
             for (i = 0; i < numberOfSegments; i++) {
@@ -67,13 +67,13 @@ var functions = {
                 body, Spawn.prototype.getCreepName('carrier'), {
                     role: 'carrier',
                     serial: Spawn.prototype.getSerial('carrier'),
-                    operation: 'none',
-                    target: 'none'}
+                    operation: operation,
+                    target: target}
             )
         }
 
         // Function for spawning a worker
-        StructureSpawn.prototype.spawnWorker = function(energy) {
+        StructureSpawn.prototype.spawnWorker = function(energy, operation, target) {
             var body = [];
             var maxWork = 5;
             var numberofWork = Math.min(Math.floor((energy - 200) / 100), maxWork);
@@ -87,8 +87,8 @@ var functions = {
                 body, Spawn.prototype.getCreepName('worker'), {
                     role: 'worker',
                     serial: Spawn.prototype.getSerial('worker'),
-                    operation: 'none',
-                    target: 'none'}
+                    operation: operation,
+                    target: target}
             )
         }
 

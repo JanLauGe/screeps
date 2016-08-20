@@ -2,16 +2,6 @@ var listMining = {
 
     run: function() {
 
-        // Custom function for array duplicates
-        function contains(a, obj) {
-            for (var i = 0; i < a.length; i++) {
-                if (a[i] === obj) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
         // Run remote mining
         for(var i in Game.flags) {
             if (i.substring(0, 6) == 'mining') {

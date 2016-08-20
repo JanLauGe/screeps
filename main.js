@@ -10,6 +10,7 @@ var listSpawning = require('list.spawning');
 var listMining = require('list.mining');
 var listJobs = require('list.jobs');
 
+var runFlags = require('run.flags')
 var runSpawns = require('run.spawns')
 var runLinks = require('run.links')
 var runTowers = require('run.towers')
@@ -22,7 +23,31 @@ var roleUpgrader = require('role.upgrader');
 
 module.exports.loop = function () {
 
-    //setupMemory.run()
+    setupMemory.run()
+
+    //## RUN CREEPS ------------------------------------------------------------
+    for(creepname in Game.creeps) {
+        var creep = Game.creeps[creepname];
+
+        if(creep.memory.role == 'generalist') {
+            roleGeneralist.run(creep);
+        }
+        if(creep.memory.role == 'worker') {
+            roleWorker.run(creep);
+        }
+        if(creep.memory.role == 'carrier') {
+            roleCarrier.run(creep);
+        }
+        if(creep.memory.role == 'builder') {
+            roleBuilder.run(creep);
+        }
+        if(creep.memory.role == 'upgrader') {
+            roleUpgrader.run(creep);
+        }
+    }
+
+    //## RUN FLAGS -------------------------------------------------------------
+    runFlags.run()
 
     //## RUN ROOMS -------------------------------------------------------------
     for(r in Game.rooms) {
@@ -34,7 +59,7 @@ module.exports.loop = function () {
 
                 Memory.byroom[thisroom.name] = {};
                 setupRoom.run(thisroom);
-                //stats.run(thisroom)
+                stats.run(thisroom)
 
                 // Get lists
                 listSpawning.run(thisroom);
@@ -63,27 +88,6 @@ module.exports.loop = function () {
         //## NEUTRAL ROOMS
         else if(typeof thisroom.controller.owner == 'undefined') {
 
-        }
-    }
-
-    //## RUN CREEPS ------------------------------------------------------------
-    for(creepname in Game.creeps) {
-        var creep = Game.creeps[creepname];
-
-        if(creep.memory.role == 'generalist') {
-            roleGeneralist.run(creep);
-        }
-        if(creep.memory.role == 'worker') {
-            roleWorker.run(creep);
-        }
-        if(creep.memory.role == 'carrier') {
-            roleCarrier.run(creep);
-        }
-        if(creep.memory.role == 'builder') {
-            roleBuilder.run(creep);
-        }
-        if(creep.memory.role == 'upgrader') {
-            roleUpgrader.run(creep);
         }
     }
 };
