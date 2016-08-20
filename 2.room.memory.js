@@ -45,7 +45,7 @@ var roomSettings3 = {
     'creeps_generalists' : 0,
     'creeps_workers' : 2,
     'creeps_carriers' : 2,
-    'creeps_builders' : 0,
+    'creeps_builders' : 1,
     'creeps_upgraders' : 1,
 
     'creeps_warriors' : 0,
@@ -97,8 +97,8 @@ var roomSettings5 = {
 
     'structural_lifeConts' : 200000,
     'structural_lifeRoads' : 3000,
-    'structural_lifeRamps' : 3000,
-    'structural_lifeWalls' : 3000,
+    'structural_lifeRamps' : 10000,
+    'structural_lifeWalls' : 10000,
 
     'work_on_source_1' : 4,
     'work_on_source_2' : 4

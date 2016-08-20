@@ -8,7 +8,7 @@ var roleTower2 = {
         else {
             var towermode = 'fireatwill'
         }
-        excludedplayers = ['JanLauGe']//, 'linucc', 'MyFriends']
+        excludedplayers = ['JanLauGe', 'linucc', 'MyFriends']
 
         var Mempath = Memory.byroom[tower.room.name]
         var jobRamps = Mempath.jobs.upkeep.ramps;
@@ -43,13 +43,11 @@ var roleTower2 = {
             tower.repair(Game.getObjectById(jobWalls[0]))
         }
         // backup fire at will just in case
-        else {
-            //var hostiles = tower.room.find(FIND_HOSTILE_CREEPS)
-            if (hostiles) {
-                tower.attack(tower.pos.findClosestByRange(hostiles))
-            }
-        }
-	}
+        //var hostiles = tower.room.find(FIND_HOSTILE_CREEPS)
+        // if (hostiles) {
+        //     tower.attack(tower.pos.findClosestByRange(hostiles))
+        // }
+    }
 };
 
 module.exports = roleTower2;
