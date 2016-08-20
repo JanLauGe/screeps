@@ -5,11 +5,13 @@ var runSpawns = {
       var EnergyCapacity = spawns[0].room.energyCapacityAvailable;
       var EnergyAvailable = spawns[0].room.energyAvailable;
       var Mempath = Memory.byroom[spawns[0].room.name]
-      var spawningQueue = Mempath.spawningQueue = []
+      var spawningQueue = Mempath.spawningQueue
 
       var spawn = spawns[0]
       if (spawningQueue[0] == 'worker') {
-        if (spawn.spawnWorker(EnergyCapacity)
+        if (spawn.spawnWorker(EnergyCapacity) == ERR_NOT_ENOUGH_RESOURCES) {
+            console.log('Waiting for resources to spawn creep')
+        }
       }
 
 

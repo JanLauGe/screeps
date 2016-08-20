@@ -1,7 +1,10 @@
+var functions = require('functions')
+functions.run()
 
-var setupStatic = require('setup.static')
+//var setupStatic = require('setup.static')
 var setupMemory = require('setup.memory')
 var setupRoom = require('setup.room')
+var stats = require('stats')
 
 var listSpawning = require('list.spawning');
 var listMining = require('list.mining');
@@ -12,7 +15,6 @@ var runLinks = require('run.links')
 var runTowers = require('run.towers')
 
 var roleGeneralist = require('role.generalist')
-var roleHarvester = require('role.harvester');
 var roleWorker = require('role.worker');
 var roleCarrier = require('role.carrier');
 var roleBuilder = require('role.builder');
@@ -20,7 +22,6 @@ var roleUpgrader = require('role.upgrader');
 
 module.exports.loop = function () {
 
-    setupStatic.run()
     setupMemory.run()
 
     //## RUN ROOMS -------------------------------------------------------------
@@ -33,6 +34,7 @@ module.exports.loop = function () {
 
                 Memory.byroom[thisroom.name] = {};
                 setupRoom.run(thisroom);
+                stats.run(thisroom)
 
                 // Get lists
                 listSpawning.run(thisroom);
