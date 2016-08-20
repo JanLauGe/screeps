@@ -21,5 +21,6 @@ Memory.global.diplomacy = {
     'neutral' : undefined};
 Memory.global.creeps = {};
 Memory.byroom = {};
+Memory.stats = {};
 
 module.exports = setupStatic;

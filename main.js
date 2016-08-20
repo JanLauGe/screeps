@@ -34,7 +34,7 @@ module.exports.loop = function () {
 
                 Memory.byroom[thisroom.name] = {};
                 setupRoom.run(thisroom);
-                stats.run(thisroom)
+                //stats.run(thisroom)
 
                 // Get lists
                 listSpawning.run(thisroom);

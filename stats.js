@@ -2,10 +2,13 @@ var stats = {
 
     // suggestion: if half empty but no dropoffs, switch mode and start loading already
 
-    run: function(room) {
+    run: function(thisroom) {
+        Memory.stats["room." + thisroom.name] = {}
 
-        Memory.stats["room." + room.name + ".energyAvailable"] = room.energyAvailable;
-        Memory.stats["room." + room.name + ".energyCapacityAvailable"] = room.energyCapacityAvailable;
-        Memory.stats["room." + room.name + ".controllerProgress"] = room.controller.progress;
+        Memory.stats["room." + thisroom.name + ".energyAvailable"] = thisroom.energyAvailable;
+        Memory.stats["room." + thisroom.name + ".energyCapacityAvailable"] = thisroom.energyCapacityAvailable;
+        Memory.stats["room." + thisroom.name + ".controllerProgress"] = thisroom.controller.progress;
     }
 };
+
+module.exports = stats;

@@ -1,7 +1,6 @@
 var roleWorker = {
 
     run: function(creep) {
-        console.log(JSON.stringify(creep.memory))
 
         var operation = creep.memory.operation
         var target = creep.memory.target
