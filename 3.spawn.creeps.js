@@ -6,25 +6,7 @@ var spawnCreeps = {
         var EnergyAvailable = spawn.room.energyAvailable;
         var Mempath = Memory.byroom[spawn.room.name]
 
-        // Function to create creeps with names
-        Spawn.prototype.getCreepName = function(role){
-            var creepName = role + '_0';
-            for(i = 0; i < 9999 ; i++) {
-                creepName = role + '_' + i;
-                if(Game.creeps[creepName] === undefined || Game.creeps[creepName] === null) break;
-            }
-            return creepName;
-        }
 
-        // Function to get serial number
-        Spawn.prototype.getSerial = function(role) {
-            var creepName = role + '_0';
-            for(i = 0; i < 9999 ; i++) {
-                creepName = role + '_' + i;
-                if(Game.creeps[creepName] === undefined || Game.creeps[creepName] === null) break;
-            }
-            return i;
-        }
 
         // Code to create dynamic creep bodies
         var bodyPropGeneralist = [WORK, MOVE, CARRY]

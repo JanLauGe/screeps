@@ -1,6 +1,6 @@
 var roleCarrier = {
 
-    // suggestion: if half empty put no dropoffs, switch mode and start loading already
+    // suggestion: if half empty but no dropoffs, switch mode and start loading already
 
     run: function(creep) {
 
@@ -63,45 +63,6 @@ var roleCarrier = {
             }
         }
 
-    // // If loading: get sources
-    //     if (creep.memory.mode == 'loading') {
-
-    //         //for(var i in Memory.global.creeps_workers) {
-    //         //    var worker = Game.getObjectById(Memory.global.creeps_workers[i])
-    //         //    if( worker.carry.energy >= creep.carryCapacity / 2)
-    //         //    var target = worker
-    //         //}
-
-
-    //     // Load from worker
-    //         if (Memory.global.creeps_workers.length) {
-    //             for(var i in Memory.global.creeps_workers) {
-    //                 var worker = Game.getObjectById(Memory.global.creeps_workers[i])
-    //                 if (worker.carry > worker.carryCapacity / 2){
-    //                     console.log(worker.transfer(creep, RESOURCE_ENERGY))
-    //                     if (worker.transfer(creep, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-    //                         creep.moveTo(Game.getObjectById(Memory.global.creeps_workers[i]))
-    //                     }
-    //                 }
-    //             }
-    //         }
-
-    //     // Load dropped ressources
-    //         if(dropped.length){
-    //             for(d in dropped){
-    //                 if (creep.pickup(dropped[d]) == ERR_NOT_IN_RANGE){
-    //                     creep.moveTo(dropped[d])
-    //                 }
-    //             }
-    //         }
-
-    //     // Load from storage
-    //         else if(typeof creep.room.storage !== 'undefined') {
-    //             if (creep.room.storage.transfer(creep, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-    //                 creep.moveTo(creep.room.storage);
-    //             }
-    //         }
-    //     }
 
     // *** EXECUTION dropoff ***
     // If delivering, get tasks
@@ -195,47 +156,7 @@ var roleCarrier = {
                 }
             }
         }
-	}
+	  }
 }
-
-
-//         var target = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY);
-//         if(target) {
-//             if(creep.pickup(target) == ERR_NOT_IN_RANGE) {
-//                 creep.moveTo(target);
-//             }
-//         }
-
-//         //var number =
-//         var sources = creep.room.find(FIND_SOURCES);
-//         var sinks = creep.room.find(FIND_STRUCTURES, {
-//             filter: (structure) => {
-//                 return (structure.structureType == STRUCTURE_EXTENSION ||
-//                         structure.structureType == STRUCTURE_SPAWN ||
-//                         structure.structureType == STRUCTURE_TOWER) && structure.energy < structure.energyCapacity;
-//             }
-//         });
-// 	    if(creep.carry.energy < creep.carryCapacity) {
-//             if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-//                 creep.moveTo(sources[0]);
-//             }
-//         }
-//         else {
-
-//             if(sinks.length > 0) {
-//                 if(creep.transfer(sinks[0], RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-//                     creep.moveTo(sinks[0]);
-//                 }
-//             }else {
-//                 var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
-//                 if(sinks.length) {
-//                     if(creep.build(sinks[0]) == ERR_NOT_IN_RANGE) {
-//                         creep.moveTo(sinks[0]);
-//                     }
-//                 }
-//             }
-//         }
-// 	}
-// };
 
 module.exports = roleCarrier;

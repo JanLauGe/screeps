@@ -1,0 +1,25 @@
+// // On initialisting:
+// // Clear memory completely
+// for(var i in Memory) {
+//     delete Memory[i];
+// }
+// // Remove dead creeps from memory
+// for(var i in Memory.global.creeps) {
+//     if(!Game.creeps[i]) {
+//         delete Memory.global.creeps[i];
+//     }
+// }
+
+// ## Build memory tree
+// Diplomacy
+Memory.global = {}
+Memory.global.diplomacy = {
+    'war' : false,
+    'peace' : true,
+    'enemies' : ['AndrolGenhald','Tardigrade','cazantyl'],
+    'allies' : undefined,
+    'neutral' : undefined};
+Memory.global.creeps = {};
+Memory.byroom = {};
+
+module.exports = setupStatic;

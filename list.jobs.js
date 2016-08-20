@@ -5,16 +5,6 @@ var listJobs = {
         //var Mempath = Memory.byroom[thisroom.name]
         var Mempath = Memory.byroom[thisroom.name]
 
-        // Custom function for array duplicates
-        function contains(a, obj) {
-            for (var i = 0; i < a.length; i++) {
-                if (a[i] === obj) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
 
     // *** LIST of pickup jobs ***
         // Currently, list of pickups is generated afresh every single tick
