@@ -7,7 +7,7 @@ var runFlags = {
         var operations = []
         for(i in Game.creeps) {
             var creep = Game.creeps[i]
-            if (creep.role == 'worker') {
+            if (creep.memory.role == 'worker') {
                 if (typeof creep.memory.operation !== 'undefined') {
                     operations.push(creep.memory.operation)
                     console.log(operations)

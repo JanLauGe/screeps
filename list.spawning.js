@@ -12,7 +12,6 @@ var listSpawning = {
             }
         }
 
-
         needsSpawning(thisroom, 'generalist')
         needsSpawning(thisroom, 'carrier')
         needsSpawning(thisroom, 'worker')
