@@ -75,14 +75,15 @@ var functions = {
         // Function for spawning a worker
         StructureSpawn.prototype.spawnWorker = function(energy, operation, target) {
             var body = [];
-            var maxWork = 5;
-            var numberofWork = Math.min(Math.floor((energy - 200) / 100), maxWork);
-            for (i = 0; i < numberofWork; i++) {
-                body.push(WORK);
+            if (energy < 550) {
+                var body = [MOVE,WORK,WORK,CARRY]
             }
-            body.push(WORK);
-            body.push(CARRY);
-            body.push(MOVE);
+            else if (energy < 800) {
+                var body = [MOVE,MOVE,WORK,WORK,WORK,WORK,CARRY]
+            }
+            else if (energy >= 800) {
+                var body = [MOVE,MOVE,MOVE,WORK,WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY]
+            }
             return this.createCreep(
                 body, Spawn.prototype.getCreepName('worker'), {
                     role: 'worker',
