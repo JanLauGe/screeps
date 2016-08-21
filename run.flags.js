@@ -99,11 +99,12 @@ var runFlags = {
                     }
                 }
 
+
                 //## Remote mining ---------------------------------------------
                 else if (closestSpawn.room.name !== flag.pos.roomName) {
                     // If room is open
-                    if (typeof thisroom !== 'undefined' &&
-                        thisroom !== null) {
+                    var thisroom = Game.rooms[flag.pos.roomName]
+                    if (typeof thisroom !== 'undefined') {
                         // Find and assign sources
                         var sources = thisroom.find(FIND_SOURCES)
                         for(s in sources) {

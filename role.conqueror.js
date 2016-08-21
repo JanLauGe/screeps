@@ -8,10 +8,12 @@ var roleConqueror = {
         if (typeof target === 'undefined') {
             console.log('Error: no target assigned to creep ' + creep.name)
         }
-        else if(target === 'operationroom') {
+        else if (
+            target === 'operationroom' ||
+            target === 'none') {
             if (creep.room.name !== operation) {
                 // open room
-                creep.moveTo(Game.rooms[operation])
+                creep.moveTo(Game.flags['mining_'+operation])
             }
             else if (creep.room.name === operation) {
                 // assign target
@@ -31,15 +33,12 @@ var roleConqueror = {
                     creep.moveTo(controller)
                 }
             }
-            else if (creep.room.name !== operation)
+            else if (creep.room.name !== operation) {
                 creep.moveTo(Game.rooms[operation])
             }
             else {
                 console.log('Error: no operation assigned to creep ' + creep.name)
             }
-      	}
-      	else {
-      	    console.log('Error: no valid target assigned to creep ' + creep.name)
       	}
     }
 };
