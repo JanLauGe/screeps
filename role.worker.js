@@ -28,10 +28,10 @@ var roleWorker = {
         }
 
         else if (creep.memory.mode === 'working') {
-            if (typeof target == 'undefined') {
-                console.log('Error:', creep.name, 'has no target')
+            if (typeof target === 'undefined') {
+                console.log('Error: no target assigned to ' + creep.name)
             }
-            else if(target == 'none') {
+            else if(target === 'none') {
                 if (operation !== 'undefined' &&
                 operation !== 'none') {
                     if (creep.room.name !== operation) {
@@ -51,11 +51,11 @@ var roleWorker = {
                 if (operation === creep.room.name) {
                     // Go to source and harvest
                     if (thistarget instanceof Source) {
-                        if (creep.harvest(thistarget) == ERR_NOT_IN_RANGE ||
-                            creep.harvest(thistarget) == ERR_NOT_ENOUGH_RESOURCES) {
+                        if (creep.harvest(thistarget) === ERR_NOT_IN_RANGE ||
+                            creep.harvest(thistarget) === ERR_NOT_ENOUGH_RESOURCES) {
                             creep.moveTo(thistarget);
                         }
-                        else if(creep.harvest(thistarget) == OK) {
+                        else if(creep.harvest(thistarget) === OK) {
                             // do nothing
                         }
                         else {
@@ -76,7 +76,7 @@ var roleWorker = {
                 }
           	}
           	else {
-          	    console.log('Error:', creep.name ,'has no target assigned')
+          	    console.log('Error: no target assigned to ' + creep.name)
           	}
         }
     }

@@ -56,7 +56,7 @@ var functions = {
         }
 
         // Function for spawning a carrier
-        StructureSpawn.prototype.spawnCarrier = function(energy, operation, target) {
+        StructureSpawn.prototype.spawnCarrier = function(energy) {
             var body = [];
             var numberOfSegments = Math.floor(energy / 100);
             for (i = 0; i < numberOfSegments; i++) {

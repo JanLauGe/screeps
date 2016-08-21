@@ -35,16 +35,19 @@ var roleTrucker = {
                             structure.structureType == STRUCTURE_CONTAINER &&
                             structure.store[RESOURCE_ENERGY] > 200)}});
                     if (dropped.length > 0) {
-                        var target = creep.pos.findClosestByRange(dropped)
+                        var job = creep.pos.findClosestByRange(dropped)
                         if (creep.pickup(target) == ERR_NOT_IN_RANGE) {
                             creep.moveTo(target)
                         }
                     }
                     else if(containers.length > 0) {
-                        var target = creep.pos.findClosestByRange(containers)
+                        var job = creep.pos.findClosestByRange(containers)
                         if (creep.pickup(target) == ERR_NOT_IN_RANGE) {
                             creep.moveTo(target)
                         }
+                    }
+                    else {
+                        creep.moveTo(Game.getObjectById(target))
                     }
                 }
             }
