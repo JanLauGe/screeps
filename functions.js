@@ -155,7 +155,7 @@ var functions = {
         // Function for spawning a conqueror
         StructureSpawn.prototype.spawnConqueror = function(energy, operation, target) {
             var body = [];
-            var maxSegments = 3;
+            var maxSegments = 2;
             var numberOfSegments = Math.min(maxSegments, Math.floor(energy / 650));
             for (i = 0; i < numberOfSegments; i++) {
                 body.push(MOVE);
