@@ -39,6 +39,16 @@ var runFlags = {
 
         // Run remote mining
         for(var i in Game.flags) {
+
+            var flag = null
+            var operation = null
+            var spawn = null
+            var thisDistance = null
+            var closestSpawn = null
+            var thisroom = null
+            var sources = null
+            var source = null
+
             if (i.substring(0, 6) == 'mining') {
                 var flag = Game.flags[i];
                 var operation = i.substring(7, 15);
@@ -76,7 +86,7 @@ var runFlags = {
                             console.log(
                                 closestSpawn.name +
                                 ' in room ' +
-                                closestSpawn.roon.name +
+                                closestSpawn.room.name +
                                 ' is spawning worker for source ' +
                                 source.id +
                                 ' in room ' +
@@ -107,7 +117,7 @@ var runFlags = {
                                 console.log(
                                     closestSpawn.name +
                                     ' in room ' +
-                                    closestSpawn.roon.name +
+                                    closestSpawn.room.name +
                                     ' is spawning worker for source ' +
                                     source.id +
                                     ' in room ' +
@@ -127,7 +137,7 @@ var runFlags = {
                                 console.log(
                                     closestSpawn.name +
                                     ' in room ' +
-                                    closestSpawn.roon.name +
+                                    closestSpawn.room.name +
                                     ' is spawning trucker for source ' +
                                     source.id +
                                     ' in room ' +
@@ -147,11 +157,9 @@ var runFlags = {
                                 console.log(
                                     closestSpawn.name +
                                     ' in room ' +
-                                    closestSpawn.roon.name +
+                                    closestSpawn.room.name +
                                     ' is spawning conqueror for operation ' +
-                                    operation +
-                                    ' in room ' +
-                                    source.pos.roomName)
+                                    operation)
                                 closestSpawn.spawnConqueror(
                                     closestSpawn.room.energyCapacityAvailable,
                                     operation,
@@ -167,16 +175,19 @@ var runFlags = {
                         // do nothing
                     }
                     else if(!contains(conquerorOperations, operation)) {
-                        // spawn worker for this source
-                        console.log('spawning conqueror for operation' + operation)
+                        // spawn conqueror for this source
+                        console.log(
+                            closestSpawn.name +
+                            ' in room ' +
+                            closestSpawn.room.name +
+                            ' is spawning conqueror for operation ' +
+                            operation)
                         closestSpawn.spawnConqueror(
                             closestSpawn.room.energyCapacityAvailable,
                             operation,
                             'none')
                     }
                 }
-
-
             }
         }
     }
