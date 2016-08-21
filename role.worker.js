@@ -18,6 +18,7 @@ var roleWorker = {
             creep.memory.mode = 'working'
         }
 
+        // Mode execution ----------------------------------
         if (creep.memory.mode === 'building') {
             var jobs = creep.room.find(FIND_CONSTRUCTION_SITES)
             var job = creep.pos.findClosestByRange(jobs)
@@ -32,20 +33,21 @@ var roleWorker = {
                 console.log('Error: no target assigned to ' + creep.name)
             }
             else if(target === 'none') {
-                if (operation !== 'undefined' &&
-                operation !== 'none') {
+                if (typeof operation !== 'undefined' &&
+                    operation !== 'none') {
                     if (creep.room.name !== operation) {
                         // open room
                         creep.moveTo(Game.flags['mining_'+operation])
                     }
                     else if (creep.room.name === operation) {
-                        creep.memory.target = creep.room.find(FIND_SOURCES)[0].id
+                        creep.memory.target = Game.rooms[operation].find(FIND_SOURCES)[0].id
                     }
                 }
             }
 
             if (typeof target !== 'undefined' &&
                 target !== 'none') {
+
                 var thistarget = Game.getObjectById(target)
 
                 if (operation === creep.room.name) {
@@ -59,11 +61,11 @@ var roleWorker = {
                             // do nothing
                         }
                         else {
-                          console.log('Error, worker', creep.name ,'can not harvest source')
+                          console.log('Error, cannot harvest source for '+ creep.name)
                         }
                     }
                     else {
-                        console.log('Error, target is not a source')
+                        console.log('Error, target is not a source for ' + creep.name)
                     }
                 }
                 else if (operation !== creep.room.name &&

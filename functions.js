@@ -114,8 +114,8 @@ var functions = {
         // Function for spawning an upgrader
         StructureSpawn.prototype.spawnUpgrader = function(energy) {
             var body = [];
-            var numberofWork = Math.min(Math.floor(energy - 200) / 150);
-            for (i = 0; i < numberofWork; i++) {
+            var numberOfSegments = Math.floor((energy - 200) / 150);
+            for (i = 0; i < numberOfSegments; i++) {
                 body.push(WORK);
                 body.push(CARRY);
             }

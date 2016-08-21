@@ -102,7 +102,8 @@ var runFlags = {
                 //## Remote mining ---------------------------------------------
                 else if (closestSpawn.room.name !== flag.pos.roomName) {
                     // If room is open
-                    if (typeof thisroom == 'object') {
+                    if (typeof thisroom !== 'undefined' &&
+                        thisroom !== null) {
                         // Find and assign sources
                         var sources = thisroom.find(FIND_SOURCES)
                         for(s in sources) {
@@ -167,25 +168,26 @@ var runFlags = {
                             }
                         }
                     }
-                }
 
-                // If room is not open, send a single creep to reserve first
-                if (typeof thisroom == 'undefined') {
-                    if (contains(conquerorOperations, operation)) {
-                        // do nothing
-                    }
-                    else if(!contains(conquerorOperations, operation)) {
-                        // spawn conqueror for this source
-                        console.log(
-                            closestSpawn.name +
-                            ' in room ' +
-                            closestSpawn.room.name +
-                            ' is spawning conqueror for operation ' +
-                            operation)
-                        closestSpawn.spawnConqueror(
-                            closestSpawn.room.energyCapacityAvailable,
-                            operation,
-                            'none')
+                    // If room is not open, send a single creep to reserve first
+                    if (typeof thisroom === 'undefined' ||
+                        thisroom === null) {
+                        if (contains(conquerorOperations, operation)) {
+                            // do nothing
+                        }
+                        else if(!contains(conquerorOperations, operation)) {
+                            // spawn conqueror for this source
+                            console.log(
+                                closestSpawn.name +
+                                ' in room ' +
+                                closestSpawn.room.name +
+                                ' is spawning conqueror for operation ' +
+                                operation)
+                            closestSpawn.spawnConqueror(
+                                closestSpawn.room.energyCapacityAvailable,
+                                operation,
+                                'none')
+                        }
                     }
                 }
             }
