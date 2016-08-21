@@ -62,7 +62,7 @@ module.exports.loop = function () {
             roleWarrior.run(creep);
         }
         else if(creep.memory.role == 'healer') {
-            roleHEaler.run(creep);
+            roleHealer.run(creep);
         }
     }
 

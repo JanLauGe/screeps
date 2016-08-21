@@ -201,7 +201,7 @@ var functions = {
         }
 
         // Function for spawning a healer
-        StructureSpawn.prototype.spawnWarrior = function(energy) {
+        StructureSpawn.prototype.spawnHealer = function(energy) {
             var body = []
             var numberOfSegments = Math.floor(energy / 300);
             for (i = 0; i < numberOfSegments; i++) {
