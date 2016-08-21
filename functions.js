@@ -173,6 +173,23 @@ var functions = {
                     target: 'none'}
             )
         }
+
+        // Function for spawning a warrior
+        StructureSpawn.prototype.spawnWarrior = function(energy) {
+            var numberOfSegments = Math.floor((energy - 250) / 130);
+            for (i = 0; i < numberOfSegments; i++) {
+                body.push(ATTACK);
+                body.push(MOVE);
+            }
+            body.push(HEAL)
+            return this.createCreep(
+                body, Spawn.prototype.getCreepName('warrior'), {
+                    role: 'warrior',
+                    serial: Spawn.prototype.getSerial('warrior'),
+                    operation: 'none',
+                    target: 'none'}
+            )
+        }
     }
 };
 

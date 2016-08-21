@@ -5,13 +5,10 @@ var roleWarrior = {
 
         var attackrange = 50;
 
-    // *** MODE DEFINITION ***
+        // Mode definition ---------------------------------------------------------
         if (typeof Game.flags.attack !== 'undefined') {
             var destination = Game.flags.attack
         }
-        //else if (typeof Game.flags.conquer !== 'undefined') {
-        //    var destination = Game.flags.conquer
-        //}
 
         if (typeof destination !== 'undefined') {
             // If in other room: move
@@ -25,22 +22,18 @@ var roleWarrior = {
         }
 
 
-        // *** MODE EXECUTION ***
+        // Mode execution ---------------------------------------------------------
         if(creep.memory.mode == 'move') {
             creep.moveTo(destination)
         }
-        else if(creep.memory.mode == 'attack') {
 
+        else if(creep.memory.mode == 'attack') {
+            // If target is set via target1 flag
             if (typeof Game.flags.target1 !== 'undefined') {
                 if (Game.flags.target1.pos.roomName == destination.pos.roomName) {
-                    var targets = Game.flags.target1.pos.findInRange(FIND_HOSTILE_CREEPS, 5)
+                    var targets = Game.flags.target1.pos.findInRange(FIND_HOSTILE_CREEPS, attackrange)
                     var target = creep.pos.findClosestByPath(targets)
-                    //console.log(target[0])
-                    //console.log(creep.moveTo(target[0]))
-                    //console.log(creep.attack(target[0]))
-                    //creep.moveTo(target)
-                    //console.log(target)
-                    //console.log(target == null)
+
                     if (target !== null) {
                         creep.attack(target)
                         if (creep.attack(target) == ERR_NOT_IN_RANGE) {
@@ -52,7 +45,7 @@ var roleWarrior = {
                     }
                 }
             }
-
+            // If not target flag
             else {
                 var enemyFighters = creep.room.find(FIND_HOSTILE_CREEPS)
                 var enemyBuildings = creep.room.find(FIND_HOSTILE_STRUCTURES)

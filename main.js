@@ -55,6 +55,9 @@ module.exports.loop = function () {
         else if(creep.memory.role == 'defender') {
             roleDefender.run(creep);
         }
+        else if(creep.memory.role == 'warrior') {
+            roleDefender.run(creep);
+        }
     }
 
     //## RUN FLAGS -------------------------------------------------------------
