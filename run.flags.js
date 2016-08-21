@@ -122,12 +122,12 @@ var runFlags = {
                             !contains(defenderOperations, operation)) {
 
                             //## Spawn defender
-                            console.log(
-                                closestSpawn.name +
-                                ' in room ' +
-                                closestSpawn.room.name +
-                                ' is spawning a defender for operation ' +
-                                operation)
+                            // console.log(
+                            //     closestSpawn.name +
+                            //     ' in room ' +
+                            //     closestSpawn.room.name +
+                            //     ' is spawning a defender for operation ' +
+                            //     operation)
                             closestSpawn.spawnConqueror(
                                 closestSpawn.room.energyCapacityAvailable,
                                 operation,
@@ -142,12 +142,12 @@ var runFlags = {
                                 //## Assign conquerors
                                 if (!contains(conquerorOperations, operation)) {
                                     // spawn conqueror for this operation
-                                    console.log(
-                                        closestSpawn.name +
-                                        ' in room ' +
-                                        closestSpawn.room.name +
-                                        ' is spawning conqueror for operation ' +
-                                        operation)
+                                    // console.log(
+                                    //     closestSpawn.name +
+                                    //     ' in room ' +
+                                    //     closestSpawn.room.name +
+                                    //     ' is spawning conqueror for operation ' +
+                                    //     operation)
                                     closestSpawn.spawnConqueror(
                                         closestSpawn.room.energyCapacityAvailable,
                                         operation,
@@ -157,14 +157,14 @@ var runFlags = {
                                 //## Assign workers
                                 else if (!contains(workerTargets, source.id)) {
                                     // spawn worker for this source
-                                    console.log(
-                                        closestSpawn.name +
-                                        ' in room ' +
-                                        closestSpawn.room.name +
-                                        ' is spawning worker for source ' +
-                                        source.id +
-                                        ' in room ' +
-                                        source.pos.roomName)
+                                    // console.log(
+                                    //     closestSpawn.name +
+                                    //     ' in room ' +
+                                    //     closestSpawn.room.name +
+                                    //     ' is spawning worker for source ' +
+                                    //     source.id +
+                                    //     ' in room ' +
+                                    //     source.pos.roomName)
                                     closestSpawn.spawnWorker(
                                         closestSpawn.room.energyCapacityAvailable,
                                         operation,
@@ -174,14 +174,14 @@ var runFlags = {
                                 //## Assign truckers
                                 else if (!contains(truckerTargets, source.id)) {
                                     // spawn trucker for this source
-                                    console.log(
-                                        closestSpawn.name +
-                                        ' in room ' +
-                                        closestSpawn.room.name +
-                                        ' is spawning trucker for source ' +
-                                        source.id +
-                                        ' in room ' +
-                                        source.pos.roomName)
+                                    // console.log(
+                                    //     closestSpawn.name +
+                                    //     ' in room ' +
+                                    //     closestSpawn.room.name +
+                                    //     ' is spawning trucker for source ' +
+                                    //     source.id +
+                                    //     ' in room ' +
+                                    //     source.pos.roomName)
                                     closestSpawn.spawnTrucker(
                                         closestSpawn.room.energyCapacityAvailable,
                                         operation,
@@ -199,12 +199,12 @@ var runFlags = {
                         }
                         else if(!contains(conquerorOperations, operation)) {
                             // spawn conqueror for this source
-                            console.log(
-                                closestSpawn.name +
-                                ' in room ' +
-                                closestSpawn.room.name +
-                                ' is spawning conqueror for operation ' +
-                                operation)
+                            // console.log(
+                            //     closestSpawn.name +
+                            //     ' in room ' +
+                            //     closestSpawn.room.name +
+                            //     ' is spawning conqueror for operation ' +
+                            //     operation)
                             closestSpawn.spawnConqueror(
                                 closestSpawn.room.energyCapacityAvailable,
                                 operation,

@@ -17,7 +17,7 @@ var roleTrucker = {
 
         // ## Execude modes ----------------------------------------------------
         var thisflag = Game.flags['mining_' + operation]
-        var closestSpawn = Game.getObjectById(thisflag.memory.closestSpawn)
+        var closestSpawn = Game.getObjectById(thisflag.memory.spawn)
         if (creep.memory.mode == 'loading') {
 
             if (typeof operation !== 'undefined') {

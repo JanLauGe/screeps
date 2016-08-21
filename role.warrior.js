@@ -54,9 +54,7 @@ var roleWarrior = {
                         if (enemyFighters.length > 0){
                             var enemyFighter = creep.pos.findClosestByPath(enemyFighters)
                             if (creep.attack(enemyFighter) == ERR_NOT_IN_RANGE) {
-                                if (target.pos.inRangeTo(target, attackrange)) {
-                                    creep.moveTo(enemyFighter)
-                                }
+                                creep.moveTo(enemyFighter)
                             }
                         }
                     }

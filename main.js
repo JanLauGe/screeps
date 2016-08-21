@@ -22,6 +22,9 @@ var roleUpgrader = require('role.upgrader');
 var roleConqueror = require('role.conqueror');
 var roleTrucker = require('role.trucker');
 var roleDefender = require('role.defender');
+var roleWarrior = require('role.warrior');
+var roleHealer = require('role.healer');
+
 
 module.exports.loop = function () {
 
@@ -56,7 +59,10 @@ module.exports.loop = function () {
             roleDefender.run(creep);
         }
         else if(creep.memory.role == 'warrior') {
-            roleDefender.run(creep);
+            roleWarrior.run(creep);
+        }
+        else if(creep.memory.role == 'healer') {
+            roleHEaler.run(creep);
         }
     }
 

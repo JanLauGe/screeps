@@ -134,7 +134,15 @@ var functions = {
 
         // Function for spawning a trucker
         StructureSpawn.prototype.spawnTrucker = function(energy, operation, target) {
-            var body = [MOVE,MOVE,MOVE,MOVE,MOVE,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY];
+            var body = [];
+            var maxSegments = 10;
+            var numberOfSegments = Math.min(maxSegments, Math.floor((energy - 150) / 100));
+            for (i = 0; i < numberOfSegments; i++) {
+                body.push(MOVE);
+                body.push(CARRY);
+            }
+            body.push(MOVE)
+            body.push(WORK)
             return this.createCreep(
                 body, Spawn.prototype.getCreepName('trucker'), {
                     role: 'trucker',
@@ -176,6 +184,7 @@ var functions = {
 
         // Function for spawning a warrior
         StructureSpawn.prototype.spawnWarrior = function(energy) {
+            var body = []
             var numberOfSegments = Math.floor((energy - 250) / 130);
             for (i = 0; i < numberOfSegments; i++) {
                 body.push(ATTACK);
@@ -186,6 +195,23 @@ var functions = {
                 body, Spawn.prototype.getCreepName('warrior'), {
                     role: 'warrior',
                     serial: Spawn.prototype.getSerial('warrior'),
+                    operation: 'none',
+                    target: 'none'}
+            )
+        }
+
+        // Function for spawning a healer
+        StructureSpawn.prototype.spawnWarrior = function(energy) {
+            var body = []
+            var numberOfSegments = Math.floor(energy / 300);
+            for (i = 0; i < numberOfSegments; i++) {
+                body.push(HEAL);
+                body.push(MOVE);
+            }
+            return this.createCreep(
+                body, Spawn.prototype.getCreepName('healer'), {
+                    role: 'healer',
+                    serial: Spawn.prototype.getSerial('healer'),
                     operation: 'none',
                     target: 'none'}
             )
