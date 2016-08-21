@@ -73,7 +73,14 @@ var runFlags = {
                         }
                         else if (!contains(workerTargets, source.id)) {
                             // spawn worker for this source
-                            console.log('spawning worker for source' + source.id)
+                            console.log(
+                                closestSpawn.name +
+                                ' in room ' +
+                                closestSpawn.roon.name +
+                                ' is spawning worker for source ' +
+                                source.id +
+                                ' in room ' +
+                                source.pos.roomName)
                             closestSpawn.spawnWorker(
                                 closestSpawn.room.energyCapacityAvailable,
                                 operation,
@@ -97,7 +104,14 @@ var runFlags = {
                             }
                             else if (!contains(workerTargets, source.id)) {
                                 // spawn worker for this source
-                                console.log('spawning worker for source' + source.id)
+                                console.log(
+                                    closestSpawn.name +
+                                    ' in room ' +
+                                    closestSpawn.roon.name +
+                                    ' is spawning worker for source ' +
+                                    source.id +
+                                    ' in room ' +
+                                    source.pos.roomName)
                                 closestSpawn.spawnWorker(
                                     closestSpawn.room.energyCapacityAvailable,
                                     operation,
@@ -110,7 +124,14 @@ var runFlags = {
                             }
                             else if (!contains(truckerTargets, source.id)) {
                                 // spawn trucker for this source
-                                console.log('spawning trucker for source' + source.id)
+                                console.log(
+                                    closestSpawn.name +
+                                    ' in room ' +
+                                    closestSpawn.roon.name +
+                                    ' is spawning trucker for source ' +
+                                    source.id +
+                                    ' in room ' +
+                                    source.pos.roomName)
                                 closestSpawn.spawnTrucker(
                                     closestSpawn.room.energyCapacityAvailable,
                                     operation,
@@ -123,7 +144,14 @@ var runFlags = {
                             }
                             else if (!contains(conquerorOperations, operation)) {
                                 // spawn conqueror for this operation
-                                console.log('spawning conqueror for operation' + operation)
+                                console.log(
+                                    closestSpawn.name +
+                                    ' in room ' +
+                                    closestSpawn.roon.name +
+                                    ' is spawning conqueror for operation ' +
+                                    operation +
+                                    ' in room ' +
+                                    source.pos.roomName)
                                 closestSpawn.spawnConqueror(
                                     closestSpawn.room.energyCapacityAvailable,
                                     operation,

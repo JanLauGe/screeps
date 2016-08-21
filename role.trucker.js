@@ -19,12 +19,13 @@ var roleTrucker = {
         var thisflag = Game.flags['mining_' + operation]
         var closestSpawn = Game.getObjectById(thisflag.memory.closestSpawn)
         if (creep.memory.mode == 'loading') {
-
+            
             if (typeof operation !== 'undefined') {
                 // If in different room: move
                 if (creep.room.name !== thisflag.pos.roomName) {
-                    creep.moveTo(Game.flags['mining_' + operation])
+                    creep.moveTo(thisflag)
                 }
+
                 // Else if in this room
                 else if (creep.room.name === thisflag.pos.roomName) {
                     var dropped = creep.room.find(FIND_DROPPED_RESOURCES, {
@@ -40,14 +41,14 @@ var roleTrucker = {
                             creep.moveTo(target)
                         }
                     }
-                    else if(containers.length > 0) {
+                    else if (containers.length > 0) {
                         var job = creep.pos.findClosestByRange(containers)
                         if (creep.pickup(target) == ERR_NOT_IN_RANGE) {
                             creep.moveTo(target)
                         }
                     }
                     else {
-                        creep.moveTo(Game.getObjectById(target))
+                        creep.moveTo(thisflag)
                     }
                 }
             }
