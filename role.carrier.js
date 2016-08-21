@@ -29,12 +29,12 @@ var roleCarrier = {
 
             var allJobs = []
             for(j = 0; j < Mempath.jobs.pickups.length; j++){
-                allJobs.push(Game.getObjectById(Memory.byroom[creep.room.name].jobs.pickups[j]))
+                allJobs.push(Game.getObjectById(Mempath.jobs.pickups[j]))
             }
-            var myJob = creep.pos.findClosestByRange(allJobs)
 
             // If pickup locations: pickup
             if (allJobs.length > 0) {
+                var myJob = creep.pos.findClosestByRange(allJobs)
 
                 // Execute job
                 if (myJob instanceof Creep) {
@@ -107,11 +107,13 @@ var roleCarrier = {
             else if(sinks.length > 0) {
                 // Keep this for fast dropoff on the road
                 for(var s in sinks) {
-                    creep.transfer(sinks[s], RESOURCE_ENERGY)
-                }
-                var sink = creep.pos.findClosestByRange(sinks)
-                if (creep.transfer(sink, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(sink);
+                    var sink = creep.pos.findClosestByRange(sinks)
+                    if (creep.transfer(sink, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(sink);
+                    }
+                    for(var s in sinks) {
+                        creep.transfer(sinks[s], RESOURCE_ENERGY)
+                    }
                 }
             }
 
