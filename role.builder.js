@@ -23,7 +23,7 @@ var roleBuilder = {
 
             // Load from storage
             if (typeof creep.room.storage !== 'undefined' &&
-                creep.room.storage > 1000) {
+                creep.room.storage.energy > 1000) {
                 if (creep.withdraw(creep.room.storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(creep.room.storage);
                 }

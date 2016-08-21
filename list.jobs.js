@@ -10,10 +10,10 @@ var listJobs = {
         // Currently, list of pickups is generated afresh every single tick
         Mempath.jobs.pickups = []
 
-        // Any worker thats half full
+        // Any worker thats full
         for(var i in Mempath.creeps.workers) {
             var worker = Game.getObjectById(Mempath.creeps.workers[i])
-            if (worker.carry.energy >= worker.carryCapacity / 1.2 &&
+            if (worker.carry.energy === worker.carryCapacity &&
                 !contains(worker.id, Mempath.jobs.pickups)) {
                 Mempath.jobs.pickups.push(worker.id)
             }
@@ -48,6 +48,10 @@ var listJobs = {
             links[2].energy > 0 &&
             links[0].energy > 0) {
             Mempath.jobs.pickups.push(links[0].id)
+        }
+        var storage = thisroom.storage
+        if (storage.length > 0) {
+          Mempath.jobs.pickups.push(storage.id)
         }
 
 
