@@ -161,6 +161,18 @@ var functions = {
                     target: target}
             )
         }
+
+        // Function for spawning a mining operations defender
+        StructureSpawn.prototype.spawnDefender = function(energy, operation, target) {
+            var body = [ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE];
+            return this.createCreep(
+                body, Spawn.prototype.getCreepName('defender'), {
+                    role: 'defender',
+                    serial: Spawn.prototype.getSerial('defender'),
+                    operation: operation,
+                    target: 'none'}
+            )
+        }
     }
 };
 

@@ -7,7 +7,6 @@ var setupRoom = require('setup.room')
 var stats = require('stats')
 
 var listSpawning = require('list.spawning');
-//var listMining = require('list.mining');
 var listJobs = require('list.jobs');
 
 var runFlags = require('run.flags')
@@ -22,6 +21,7 @@ var roleBuilder = require('role.builder');
 var roleUpgrader = require('role.upgrader');
 var roleConqueror = require('role.conqueror');
 var roleTrucker = require('role.trucker');
+var roleDefender = require('role.defender');
 
 module.exports.loop = function () {
 
@@ -51,6 +51,9 @@ module.exports.loop = function () {
         }
         else if(creep.memory.role == 'trucker') {
             roleTrucker.run(creep);
+        }
+        else if(creep.memory.role == 'defender') {
+            roleDefender.run(creep);
         }
     }
 

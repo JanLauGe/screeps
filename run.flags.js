@@ -9,6 +9,8 @@ var runFlags = {
         var truckerOperations = [];
         var conquerorTargets = [];
         var conquerorOperations = [];
+        var defenderTargets = [];
+        var defenderOperations = [];
         for(i in Game.creeps) {
             var creep = Game.creeps[i]
             if (creep.memory.role == 'worker') {
@@ -33,6 +35,14 @@ var runFlags = {
                 }
                 if (typeof creep.memory.target !== 'undefined') {
                     conquerorTargets.push(creep.memory.target)
+                }
+            }
+            else if (creep.memory.role == 'defender') {
+                if (typeof creep.memory.operation !== 'undefined') {
+                    defenderOperations.push(creep.memory.operation)
+                }
+                if (typeof creep.memory.target !== 'undefined') {
+                    defenderTargets.push(creep.memory.target)
                 }
             }
         }
@@ -105,58 +115,78 @@ var runFlags = {
                     // If room is open
                     var thisroom = Game.rooms[flag.pos.roomName]
                     if (typeof thisroom !== 'undefined') {
-                        // Find and assign sources
-                        var sources = thisroom.find(FIND_SOURCES)
-                        for(s in sources) {
-                            var source = sources[s]
 
-                            //## Assign conquerors
-                            if (!contains(conquerorOperations, operation)) {
-                                // spawn conqueror for this operation
-                                console.log(
-                                    closestSpawn.name +
-                                    ' in room ' +
-                                    closestSpawn.room.name +
-                                    ' is spawning conqueror for operation ' +
-                                    operation)
-                                closestSpawn.spawnConqueror(
-                                    closestSpawn.room.energyCapacityAvailable,
-                                    operation,
-                                    'operationroom')
-                            }
+                        // Check for invaders
+                        var invaders = thisroom.find(FIND_HOSTILE_CREEPS)
+                        if (invaders.length > 0 &&
+                            !contains(defenderOperations, operation)) {
 
-                            //## Assign workers
-                            else if (!contains(workerTargets, source.id)) {
-                                // spawn worker for this source
-                                console.log(
-                                    closestSpawn.name +
-                                    ' in room ' +
-                                    closestSpawn.room.name +
-                                    ' is spawning worker for source ' +
-                                    source.id +
-                                    ' in room ' +
-                                    source.pos.roomName)
-                                closestSpawn.spawnWorker(
-                                    closestSpawn.room.energyCapacityAvailable,
-                                    operation,
-                                    source.id)
-                            }
+                            //## Spawn defender
+                            console.log(
+                                closestSpawn.name +
+                                ' in room ' +
+                                closestSpawn.room.name +
+                                ' is spawning a defender for operation ' +
+                                operation)
+                            closestSpawn.spawnConqueror(
+                                closestSpawn.room.energyCapacityAvailable,
+                                operation,
+                                'none')
+                        }
+                        else {
+                            // Find and assign sources
+                            var sources = thisroom.find(FIND_SOURCES)
+                            for(s in sources) {
+                                var source = sources[s]
 
-                            //## Assign truckers
-                            else if (!contains(truckerTargets, source.id)) {
-                                // spawn trucker for this source
-                                console.log(
-                                    closestSpawn.name +
-                                    ' in room ' +
-                                    closestSpawn.room.name +
-                                    ' is spawning trucker for source ' +
-                                    source.id +
-                                    ' in room ' +
-                                    source.pos.roomName)
-                                closestSpawn.spawnTrucker(
-                                    closestSpawn.room.energyCapacityAvailable,
-                                    operation,
-                                    source.id)
+                                //## Assign conquerors
+                                if (!contains(conquerorOperations, operation)) {
+                                    // spawn conqueror for this operation
+                                    console.log(
+                                        closestSpawn.name +
+                                        ' in room ' +
+                                        closestSpawn.room.name +
+                                        ' is spawning conqueror for operation ' +
+                                        operation)
+                                    closestSpawn.spawnConqueror(
+                                        closestSpawn.room.energyCapacityAvailable,
+                                        operation,
+                                        'operationroom')
+                                }
+
+                                //## Assign workers
+                                else if (!contains(workerTargets, source.id)) {
+                                    // spawn worker for this source
+                                    console.log(
+                                        closestSpawn.name +
+                                        ' in room ' +
+                                        closestSpawn.room.name +
+                                        ' is spawning worker for source ' +
+                                        source.id +
+                                        ' in room ' +
+                                        source.pos.roomName)
+                                    closestSpawn.spawnWorker(
+                                        closestSpawn.room.energyCapacityAvailable,
+                                        operation,
+                                        source.id)
+                                }
+
+                                //## Assign truckers
+                                else if (!contains(truckerTargets, source.id)) {
+                                    // spawn trucker for this source
+                                    console.log(
+                                        closestSpawn.name +
+                                        ' in room ' +
+                                        closestSpawn.room.name +
+                                        ' is spawning trucker for source ' +
+                                        source.id +
+                                        ' in room ' +
+                                        source.pos.roomName)
+                                    closestSpawn.spawnTrucker(
+                                        closestSpawn.room.energyCapacityAvailable,
+                                        operation,
+                                        source.id)
+                                }
                             }
                         }
                     }
