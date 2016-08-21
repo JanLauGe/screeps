@@ -108,12 +108,24 @@ var runFlags = {
                         // Find and assign sources
                         var sources = thisroom.find(FIND_SOURCES)
                         for(s in sources) {
+                            var source = sources[s]
+
+                            //## Assign conquerors
+                            if (!contains(conquerorOperations, operation)) {
+                                // spawn conqueror for this operation
+                                console.log(
+                                    closestSpawn.name +
+                                    ' in room ' +
+                                    closestSpawn.room.name +
+                                    ' is spawning conqueror for operation ' +
+                                    operation)
+                                closestSpawn.spawnConqueror(
+                                    closestSpawn.room.energyCapacityAvailable,
+                                    operation,
+                                    'operationroom')
+                            }
 
                             //## Assign workers
-                            var source = sources[s]
-                            if (contains(workerTargets, source.id)) {
-                                // do nothing
-                            }
                             else if (!contains(workerTargets, source.id)) {
                                 // spawn worker for this source
                                 console.log(
@@ -131,9 +143,6 @@ var runFlags = {
                             }
 
                             //## Assign truckers
-                            if (contains(truckerTargets, source.id)) {
-                                // do nothing
-                            }
                             else if (!contains(truckerTargets, source.id)) {
                                 // spawn trucker for this source
                                 console.log(
@@ -148,24 +157,6 @@ var runFlags = {
                                     closestSpawn.room.energyCapacityAvailable,
                                     operation,
                                     source.id)
-                            }
-
-                            //## Assign conquerors
-                            if (contains(conquerorOperations, operation)) {
-                                // do nothing
-                            }
-                            else if (!contains(conquerorOperations, operation)) {
-                                // spawn conqueror for this operation
-                                console.log(
-                                    closestSpawn.name +
-                                    ' in room ' +
-                                    closestSpawn.room.name +
-                                    ' is spawning conqueror for operation ' +
-                                    operation)
-                                closestSpawn.spawnConqueror(
-                                    closestSpawn.room.energyCapacityAvailable,
-                                    operation,
-                                    'operationroom')
                             }
                         }
                     }

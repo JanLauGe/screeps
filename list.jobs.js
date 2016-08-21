@@ -80,7 +80,7 @@ var listJobs = {
         var jobConts = thisroom.find(FIND_STRUCTURES, {
             filter: (structure) => {
                 return (structure.structureType == 'container' &&
-                structure.hits < 20000)}});
+                structure.hits < 200000)}});
         for(j in jobConts){
             if (!contains(Mempath.jobs.upkeep.conts, jobConts[j].id)) {
                 Mempath.jobs.upkeep.conts.push(jobConts[j].id)
