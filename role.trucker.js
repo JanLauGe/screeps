@@ -72,6 +72,13 @@ var roleTrucker = {
                 // Else if in this room
                 else if(creep.room.name === closestSpawn.room.name) {
 
+                    var sinks = creep.room.find(FIND_STRUCTURES, {
+                        filter: (structure) => {
+                            return (structure.structureType == STRUCTURE_EXTENSION ||
+                                structure.structureType == STRUCTURE_SPAWN) &&
+                                structure.energy < structure.energyCapacity;
+                        }
+                    });
                     var storage = creep.room.storage;
                     var links = creep.room.find(FIND_STRUCTURES, {
                         filter: (structure) => {
@@ -80,8 +87,21 @@ var roleTrucker = {
                         }
                     });
 
+                    // Deliver to sinks
+                    if (sinks.length > 0) {
+                        // Keep this for fast dropoff on the road
+                        for(var s in sinks) {
+                            var sink = creep.pos.findClosestByRange(sinks)
+                            if (creep.transfer(sink, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                                creep.moveTo(sink);
+                            }
+                            for(var s in sinks) {
+                                creep.transfer(sinks[s], RESOURCE_ENERGY)
+                            }
+                        }
+                    }
                     // Deliver to links
-                    if (links.length > 0) {
+                    else if (links.length > 0) {
                         var link = creep.pos.findClosestByRange(links)
                         if (creep.transfer(link, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                             creep.moveTo(link)
