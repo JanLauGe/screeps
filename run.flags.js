@@ -63,6 +63,7 @@ var runFlags = {
 
                     //## Domestic economy ------------------------------------------
                     // Find and assign sources
+                    var thisroom = Game.rooms[flag.pos.roomName]
                     var sources = thisroom.find(FIND_SOURCES)
                     for(s in sources) {
                         //## Assign workers ------------------------------------
@@ -83,7 +84,6 @@ var runFlags = {
 
                 //## Remote mining ---------------------------------------------
                 else if (closestSpawn.room.name !== flag.pos.roomName) {
-                    var thisroom = Game.rooms[flag.pos.roomName]
                     // If room is open
                     if (typeof thisroom == 'object') {
                         // Find and assign sources
@@ -135,12 +135,12 @@ var runFlags = {
 
                 // If room is not open, send a single creep to reserve first
                 if (typeof thisroom == 'undefined') {
-                    if (contains(operations, operation)) {
+                    if (contains(conquerorOperations, operation)) {
                         // do nothing
                     }
-                    else if(!contains(operations, operation)) {
+                    else if(!contains(conquerorOperations, operation)) {
                         // spawn worker for this source
-                        console.log('spawning worker for operation' + operation)
+                        console.log('spawning conqueror for operation' + operation)
                         closestSpawn.spawnWorker(
                             closestSpawn.room.energyCapacityAvailable,
                             operation,

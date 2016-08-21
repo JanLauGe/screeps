@@ -6,7 +6,7 @@ var listJobs = {
         var Mempath = Memory.byroom[thisroom.name]
 
 
-    // *** LIST of pickup jobs ***
+        // List of pickup jobs -----------------------------------------------
         // Currently, list of pickups is generated afresh every single tick
         Mempath.jobs.pickups = []
 
@@ -51,15 +51,14 @@ var listJobs = {
         }
 
 
-        // *** List of upkeep jobs ***
-
+        // List of upkeep jobs -----------------------------------------------
         // Add new jobs
 
         // Find all ramps
         var jobRamps = thisroom.find(FIND_MY_STRUCTURES, {
             filter: (structure) => {
                 return (structure.structureType == 'rampart' &&
-                structure.hits < Mempath.settings.structural_lifeRamps)}});
+                structure.hits < 4000)}});
         for(j in jobRamps){
             if (!contains(Mempath.jobs.upkeep.ramps, jobRamps[j].id)) {
                 Mempath.jobs.upkeep.ramps.push(jobRamps[j].id)
@@ -70,7 +69,7 @@ var listJobs = {
         var jobRoads = thisroom.find(FIND_STRUCTURES, {
             filter: (structure) => {
                 return (structure.structureType == 'road' &&
-                structure.hits < Mempath.settings.structural_lifeRoads)}});
+                structure.hits < 4000)}});
         for(j in jobRoads){
             if (!contains(Mempath.jobs.upkeep.roads, jobRoads[j].id)) {
                 Mempath.jobs.upkeep.roads.push(jobRoads[j].id)
@@ -81,7 +80,7 @@ var listJobs = {
         var jobConts = thisroom.find(FIND_STRUCTURES, {
             filter: (structure) => {
                 return (structure.structureType == 'container' &&
-                structure.hits < Mempath.settings.structural_lifeConts)}});
+                structure.hits < 20000)}});
         for(j in jobConts){
             if (!contains(Mempath.jobs.upkeep.conts, jobConts[j].id)) {
                 Mempath.jobs.upkeep.conts.push(jobConts[j].id)
@@ -92,7 +91,7 @@ var listJobs = {
         var jobsWalls = thisroom.find(FIND_STRUCTURES, {
             filter: (structure) => {
                 return (structure.structureType == 'constructedWall' &&
-                structure.hits < Mempath.settings.structural_lifeWalls)}});
+                structure.hits < 4000)}});
         for(j in jobsWalls){
             if (!contains(Mempath.jobs.upkeep.walls, jobsWalls[j].id)) {
                 Mempath.jobs.upkeep.walls.push(jobsWalls[j].id)
@@ -107,7 +106,7 @@ var listJobs = {
         var jobRamps = thisroom.find(FIND_MY_STRUCTURES, {
             filter: (structure) => {
                 return (structure.structureType == 'rampart' &&
-                (structure.hits > Mempath.settings.structural_lifeRamps * 2 ||
+                (structure.hits > 5000 ||
                 structure.hits == structure.hitsMax))}});
         for(j in jobRamps){
             if (contains(joblist, jobRamps[j].id)) {
@@ -120,7 +119,7 @@ var listJobs = {
         var jobRoads = thisroom.find(FIND_STRUCTURES, {
             filter: (structure) => {
                 return (structure.structureType == 'road' &&
-                structure.hits == structure.hitsMax)}});
+                structure.hits >= (structure.hitsMax - 500))}});
         for(j in jobRoads){
             if (contains(joblist, jobRoads[j].id)) {
                 joblist.splice(joblist.indexOf(jobRoads[j]),1)
@@ -132,7 +131,7 @@ var listJobs = {
         var jobConts = thisroom.find(FIND_STRUCTURES, {
             filter: (structure) => {
                 return (structure.structureType == 'container' &&
-                structure.hits == structure.hitsMax)}});
+                structure.hits >= (structure.hitsMax - 500))}});
         for(j in jobConts){
             if (contains(joblist, jobConts[j].id)) {
                 joblist.splice(joblist.indexOf(jobConts[j]),1)
@@ -144,7 +143,7 @@ var listJobs = {
         var jobsWalls = thisroom.find(FIND_STRUCTURES, {
             filter: (structure) => {
                 return (structure.structureType == 'constructedWall' &&
-                structure.hits >= Mempath.settings.structural_lifeWalls)}});
+                structure.hits >= 5000)}});
         for(j in jobsWalls){
             if (contains(joblist, jobsWalls[j].id)) {
                 joblist.splice(joblist.indexOf(jobsWalls[j]),1)

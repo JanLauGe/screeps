@@ -145,7 +145,7 @@ var functions = {
 
         // Function for spawning a conqueror
         StructureSpawn.prototype.spawnConqueror = function(energy, operation, target) {
-            var body = [MOVE,MOVE,CLAIM,CLAIM];
+            var body = [MOVE,MOVE,MOVE,CLAIM,CLAIM,CLAIM];
             return this.createCreep(
                 body, Spawn.prototype.getCreepName('conqueror'), {
                     role: 'conqueror',

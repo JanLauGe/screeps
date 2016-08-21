@@ -15,7 +15,7 @@ var roleConqueror = {
                     // open room
                     creep.moveTo(Game.flags['mining_'+operation])
                 }
-                else if (creep.room.name !== operation) {
+                else if (creep.room.name === operation) {
                     creep.memory.target = creep.room.controller.id
                 }
             }
@@ -27,21 +27,16 @@ var roleConqueror = {
 
             if (operation == creep.room.name) {
                 // Go to controller and reserve
-                if (thistarget instanceof Controller) {
-                    if (creep.reserve(thistarget) == ERR_NOT_IN_RANGE ||
-                        creep.reserve(thistarget) == ERR_INVALID_TARGET ||
-                        creep.reserve(thistarget) == ERR_NOT_OWNER) {
-                        creep.moveTo(thistarget);
-                    }
-                    else if (creep.reserve(thistarget) == OK) {
-                        // do nothing
-                    }
-                    else {
-                      console.log('Error, conqueror ' + creep.name + ' can not reserve controller')
-                    }
+                if (creep.reserveController(thistarget) == ERR_NOT_IN_RANGE ||
+                    creep.reserveController(thistarget) == ERR_INVALID_TARGET ||
+                    creep.reserveController(thistarget) == ERR_NOT_OWNER) {
+                    creep.moveTo(thistarget);
+                }
+                else if (creep.reserveController(thistarget) == OK) {
+                    // do nothing
                 }
                 else {
-                    console.log('Error, target is not a room controller')
+                  console.log('Error, conqueror ' + creep.name + ' can not reserve controller')
                 }
             }
             else if (operation !== creep.room.name &&
