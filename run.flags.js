@@ -164,7 +164,7 @@ var runFlags = {
                                 closestSpawn.spawnConqueror(
                                     closestSpawn.room.energyCapacityAvailable,
                                     operation,
-                                    'none')
+                                    'operationroom')
                             }
                         }
                     }
@@ -186,7 +186,7 @@ var runFlags = {
                             closestSpawn.spawnConqueror(
                                 closestSpawn.room.energyCapacityAvailable,
                                 operation,
-                                'none')
+                                'operationroom')
                         }
                     }
                 }

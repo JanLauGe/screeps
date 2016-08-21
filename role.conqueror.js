@@ -8,39 +8,30 @@ var roleConqueror = {
         if (typeof target === 'undefined') {
             console.log('Error: no target assigned to creep ' + creep.name)
         }
-        else if(target === 'none') {
-            if (typeof operation !== 'undefined' &&
-                operation !== 'none') {
-                if (creep.room.name !== operation) {
-                    // open room
-                    creep.moveTo(Game.rooms[operation])
-                }
-                else if (creep.room.name === operation) {
-                    // assign target
-                    creep.memory.target = creep.room.controller.id
-                }
+        else if(target === 'operationroom') {
+            if (creep.room.name !== operation) {
+                // open room
+                creep.moveTo(Game.rooms[operation])
+            }
+            else if (creep.room.name === operation) {
+                // assign target
+                creep.memory.target = creep.room.controller.id
+                var target = creep.room.controller.id
             }
         }
 
-        // If target is assigned
+        // If final target is assigned
         if (typeof target !== 'undefined' &&
-            target !== 'none') {
-            var thistarget = Game.getObjectById(target)
+            target !== 'operationroom') {
+            var controller = Game.getObjectById(target)
 
-            if (operation === creep.room.name) {
+            if (creep.room.name === operation) {
                 // Go to controller and reserve
-                creep.moveTo(thistarget)
-                if (creep.reserveController(thistarget) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(thistarget)
-                }
-                else if (creep.reserveController(thistarget) == ERR_INVALID_TARGET ||
-                    creep.reserveController(thistarget) == ERR_NOT_OWNER) {
-                    console.log('Error: cannot reserve room ' + operation)
+                if (creep.reserveController(controller) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(controller)
                 }
             }
-            else if (operation !== creep.room.name &&
-                typeof operation !== 'undefined' &&
-                operation !== 'none') {
+            else if (creep.room.name !== operation)
                 creep.moveTo(Game.rooms[operation])
             }
             else {
