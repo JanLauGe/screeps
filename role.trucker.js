@@ -11,7 +11,7 @@ var roleTrucker = {
         if (creep.carry.energy == 0) {
             creep.memory.mode = 'loading'
         }
-        else if(creep.carry.energy == creep.carryCapacity) {
+        else if(creep.carry.energy >= creep.carryCapacity * 0.66) {
             creep.memory.mode = 'dropoff'
         }
 

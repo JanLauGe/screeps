@@ -35,7 +35,7 @@ var listJobs = {
             for(var c = 0; c < containers.length; c++) {
                 var cont = containers[c]
                 if (!contains(cont.id, Mempath.jobs.pickups) &&
-                    cont.store[RESOURCE_ENERGY] >= 500) {
+                    cont.store[RESOURCE_ENERGY] >= 200) {
                         Mempath.jobs.pickups.push(cont.id)
                 }
             }

@@ -9,10 +9,10 @@ var runTowers = {
             var towermode = 'holdfire'
         }
         else if(towers[0].room == 'E47N45') {
-            var towermode = 'holdfire'
+            var towermode = 'fireatwill'
         }
         else {
-            var towermode = 'holdfire'
+            var towermode = 'fireatwill'
         }
 
         // Put players on this list to avoid friendly fire§
