@@ -38,7 +38,7 @@ var runFlags = {
                 }
                 flag.memory.spawn = closestSpawn.id;
 
-                var thisroom = Game.rooms[operation]
+                var thisroom = Game.rooms[flag.pos.roomName]
                 // If room is open
                 if (typeof thisroom == 'object') {
                     // Find and assign sources
@@ -51,7 +51,7 @@ var runFlags = {
                         }
                         else if(!contains(targets, source.id)) {
                             // spawn worker for this source
-                            console.log('spawning worker')
+                            console.log('spawning worker for source ' + source.id)
                             closestSpawn.spawnWorker(
                                 closestSpawn.room.energyCapacityAvailable,
                                 operation,
@@ -66,7 +66,8 @@ var runFlags = {
                     }
                     else if(!contains(operations, operation)) {
                         // spawn worker for this source
-                        closestSpawn.spawnWorker(
+                        console.log('spawning worker for operation ' + operation)
+                        closestSpawn.spawnWorker(    
                             closestSpawn.room.energyCapacityAvailable,
                             operation,
                             source.id)
