@@ -47,6 +47,9 @@ module.exports.loop = function () {
     }
 
     //## RUN FLAGS -------------------------------------------------------------
+    //for(i in Game.flags) {
+    //    console.log(JSON.stringify(Game.flags[i]))
+    //}
     runFlags.run()
 
     //## RUN ROOMS -------------------------------------------------------------

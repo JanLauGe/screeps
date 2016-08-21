@@ -67,8 +67,8 @@ var functions = {
                 body, Spawn.prototype.getCreepName('carrier'), {
                     role: 'carrier',
                     serial: Spawn.prototype.getSerial('carrier'),
-                    operation: operation,
-                    target: target}
+                    operation: 'none',
+                    target: 'none'}
             )
         }
 
@@ -93,7 +93,7 @@ var functions = {
             )
         }
 
-        // Function for spawning a generalist
+        // Function for spawning a builder
         StructureSpawn.prototype.spawnBuilder = function(energy) {
             var body = [];
             var numberOfSegments = Math.floor(energy / 200);
@@ -111,7 +111,7 @@ var functions = {
             )
         }
 
-        // Function for spawning a upgrader
+        // Function for spawning an upgrader
         StructureSpawn.prototype.spawnUpgrader = function(energy) {
             var body = [];
             var numberofWork = Math.min(Math.floor(energy - 200) / 150);
@@ -128,6 +128,30 @@ var functions = {
                     serial: Spawn.prototype.getSerial('upgrader'),
                     operation: 'none',
                     target: 'none'}
+            )
+        }
+
+        // Function for spawning a trucker
+        StructureSpawn.prototype.spawnTrucker = function(energy, operation, target) {
+            var body = [MOVE,MOVE,MOVE,MOVE,MOVE,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY];
+            return this.createCreep(
+                body, Spawn.prototype.getCreepName('trucker'), {
+                    role: 'trucker',
+                    serial: Spawn.prototype.getSerial('trucker'),
+                    operation: operation,
+                    target: target}
+            )
+        }
+
+        // Function for spawning a conqueror
+        StructureSpawn.prototype.spawnConqueror = function(energy, operation, target) {
+            var body = [MOVE,MOVE,CLAIM,CLAIM];
+            return this.createCreep(
+                body, Spawn.prototype.getCreepName('conqueror'), {
+                    role: 'conqueror',
+                    serial: Spawn.prototype.getSerial('conqueror'),
+                    operation: operation,
+                    target: target}
             )
         }
     }

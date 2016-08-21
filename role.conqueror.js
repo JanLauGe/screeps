@@ -1,4 +1,4 @@
-var roleWorker = {
+var roleConqueror = {
 
     run: function(creep) {
 
@@ -16,7 +16,7 @@ var roleWorker = {
                     creep.moveTo(Game.flags['mining_'+operation])
                 }
                 else if (creep.room.name !== operation) {
-                    creep.memory.target = creep.room.find(FIND_SOURCES)[0].id
+                    creep.memory.target = creep.room.controller.id
                 }
             }
         }
@@ -26,36 +26,37 @@ var roleWorker = {
             var thistarget = Game.getObjectById(target)
 
             if (operation == creep.room.name) {
-                // Go to source and harvest
-                if (thistarget instanceof Source) {
-                    if (creep.harvest(thistarget) == ERR_NOT_IN_RANGE ||
-                        creep.harvest(thistarget) == ERR_NOT_ENOUGH_RESOURCES) {
+                // Go to controller and reserve
+                if (thistarget instanceof Controller) {
+                    if (creep.reserve(thistarget) == ERR_NOT_IN_RANGE ||
+                        creep.reserve(thistarget) == ERR_INVALID_TARGET ||
+                        creep.reserve(thistarget) == ERR_NOT_OWNER) {
                         creep.moveTo(thistarget);
                     }
-                    else if(creep.harvest(thistarget) == OK) {
+                    else if (creep.reserve(thistarget) == OK) {
                         // do nothing
                     }
                     else {
-                      console.log('Error, worker', creep.name ,'can not harvest source')
+                      console.log('Error, conqueror ' + creep.name + ' can not reserve controller')
                     }
                 }
                 else {
-                    console.log('Error, target is not a source')
+                    console.log('Error, target is not a room controller')
                 }
             }
             else if (operation !== creep.room.name &&
             typeof operation !== 'undefined' &&
             operation !== 'none') {
-                creep.moveTo(Game.flags['mining_'+operation])
+                creep.moveTo(Game.flags['mining_' + operation])
             }
             else {
-                console.log('Worker error: no operation assigned')
+                console.log('Error: no operation assigned to creep ' + creep.name)
             }
       	}
       	else {
-      	    console.log('Error:', creep.name ,'has no target assigned')
+      	    console.log('Error: no target assigned to creep ' + creep.name)
       	}
     }
 };
 
-module.exports = roleWorker;
+module.exports = roleConqueror;
