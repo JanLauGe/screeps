@@ -58,25 +58,26 @@ var runFlags = {
                 }
 
                 flag.memory.spawn = closestSpawn.id;
-                if (closestSpawn.room.name === flag.pos.roomName)
-                // If closest spawn is in the same room
+                if (closestSpawn.room.name === flag.pos.roomName) {
+                    // If closest spawn is in the same room
 
-                //## Domestic economy ------------------------------------------
-                // Find and assign sources
-                var sources = thisroom.find(FIND_SOURCES)
-                for(s in sources) {
-                    //## Assign workers ------------------------------------
-                    var source = sources[s]
-                    if (contains(workerTargets, source.id)) {
-                        // do nothing
-                    }
-                    else if (!contains(workerTargets, source.id)) {
-                        // spawn worker for this source
-                        console.log('spawning worker for source' + source.id)
-                        closestSpawn.spawnWorker(
-                            closestSpawn.room.energyCapacityAvailable,
-                            operation,
-                            source.id)
+                    //## Domestic economy ------------------------------------------
+                    // Find and assign sources
+                    var sources = thisroom.find(FIND_SOURCES)
+                    for(s in sources) {
+                        //## Assign workers ------------------------------------
+                        var source = sources[s]
+                        if (contains(workerTargets, source.id)) {
+                            // do nothing
+                        }
+                        else if (!contains(workerTargets, source.id)) {
+                            // spawn worker for this source
+                            console.log('spawning worker for source' + source.id)
+                            closestSpawn.spawnWorker(
+                                closestSpawn.room.energyCapacityAvailable,
+                                operation,
+                                source.id)
+                        }
                     }
                 }
 
@@ -133,7 +134,7 @@ var runFlags = {
                 }
 
                 // If room is not open, send a single creep to reserve first
-                if(typeof thisroom == 'undefined') {
+                if (typeof thisroom == 'undefined') {
                     if (contains(operations, operation)) {
                         // do nothing
                     }

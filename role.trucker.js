@@ -3,6 +3,10 @@ var roleTrucker = {
     run: function(creep) {
 
         // ## Mode definition --------------------------------------------------
+
+        var operation = creep.memory.operation
+        var target = creep.memory.target
+
         // If empty, load, if full, build
         if (creep.carry.energy == 0) {
             creep.memory.mode = 'loading'
