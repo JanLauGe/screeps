@@ -41,39 +41,41 @@ module.exports.loop = function () {
         var thisroom = Game.rooms[r];
 
         //## MY ROOMS
-        if (typeof thisroom.controller.owner !== 'undefined') {
-            if (thisroom.controller.owner.username === 'JanLauGe') {
+        if (typeof thisroom.controller !== 'undefined') {
+            if (typeof thisroom.controller.owner !== 'undefined') {
+                if (thisroom.controller.owner.username === 'JanLauGe') {
 
-                Memory.byroom[thisroom.name] = {};
-                setupRoom.run(thisroom);
-                stats.run(thisroom)
+                    Memory.byroom[thisroom.name] = {};
+                    setupRoom.run(thisroom);
+                    stats.run(thisroom)
 
-                // Get lists
-                listSpawning.run(thisroom);
-                listJobs.run(thisroom);
+                    // Get lists
+                    listSpawning.run(thisroom);
+                    listJobs.run(thisroom);
 
-                // Run structures
-                var towers = thisroom.find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_TOWER}});
-                var spawns = thisroom.find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_SPAWN}});
-                var links = thisroom.find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_LINK}});
-                runTowers.run(towers)
-                runSpawns.run(spawns)
-                runLinks.run(links)
+                    // Run structures
+                    var towers = thisroom.find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_TOWER}});
+                    var spawns = thisroom.find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_SPAWN}});
+                    var links = thisroom.find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_LINK}});
+                    runTowers.run(towers)
+                    runSpawns.run(spawns)
+                    runLinks.run(links)
 
-                // Alarm if enemy enters room
-                var hostiles = thisroom.find(FIND_HOSTILE_CREEPS)
-                if (hostiles.length > 0) {
-                    var username = hostiles[0].owner.username;
-                    Game.notify(`User ${hostiles[0].owner.username} spotted in room ${thisroom.name}`);
+                    // Alarm if enemy enters room
+                    var hostiles = thisroom.find(FIND_HOSTILE_CREEPS)
+                    if (hostiles.length > 0) {
+                        var username = hostiles[0].owner.username;
+                        Game.notify(`User ${hostiles[0].owner.username} spotted in room ${thisroom.name}`);
+                    }
                 }
-            }
-            //## ENEMY ROOMS
-            else if(thisroom.controller.owner.username !== 'JanLauGe') {
+                //## ENEMY ROOMS
+                else if(thisroom.controller.owner.username !== 'JanLauGe') {
 
+                }
             }
         }
         //## NEUTRAL ROOMS
-        else if(typeof thisroom.controller.owner == 'undefined') {
+        else if(typeof thisroom.controller === 'undefined') {
 
         }
     }

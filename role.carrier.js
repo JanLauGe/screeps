@@ -106,14 +106,17 @@ var roleCarrier = {
             // Deliver to sinks
             else if(sinks.length > 0) {
                 // Keep this for fast dropoff on the road
-                for(var s in sinks) {
-                    var sink = creep.pos.findClosestByRange(sinks)
-                    if (creep.transfer(sink, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(sink);
+                creep.transfer(creep.pos.findInRange(FIND_STRUCTURES, {
+                    filter: (structure) => {
+                        return (structure.structureType == STRUCTURE_EXTENSION ||
+                            structure.structureType == STRUCTURE_SPAWN) &&
+                            structure.energy < structure.energyCapacity;
                     }
-                    for(var s in sinks) {
-                        creep.transfer(sinks[s], RESOURCE_ENERGY)
-                    }
+                }, 1), RESOURCE_ENERGY);
+                var sink = creep.pos.findClosestByRange(sinks)
+                if (creep.transfer(sink, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(sink);
+                    creep.transfer(sink, RESOURCE_ENERGY)
                 }
             }
 

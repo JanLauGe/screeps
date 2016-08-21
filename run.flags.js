@@ -128,7 +128,7 @@ var runFlags = {
                             //     closestSpawn.room.name +
                             //     ' is spawning a defender for operation ' +
                             //     operation)
-                            closestSpawn.spawnConqueror(
+                            closestSpawn.spawnDefender(
                                 closestSpawn.room.energyCapacityAvailable,
                                 operation,
                                 'none')
