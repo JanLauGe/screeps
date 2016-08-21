@@ -20,6 +20,8 @@ var roleWorker = require('role.worker');
 var roleCarrier = require('role.carrier');
 var roleBuilder = require('role.builder');
 var roleUpgrader = require('role.upgrader');
+var roleConqueror = require('role.conqueror');
+var roleTrucker = require('role.trucker');
 
 module.exports.loop = function () {
 
@@ -32,17 +34,23 @@ module.exports.loop = function () {
         if(creep.memory.role == 'generalist') {
             roleGeneralist.run(creep);
         }
-        if(creep.memory.role == 'worker') {
+        else if(creep.memory.role == 'worker') {
             roleWorker.run(creep);
         }
-        if(creep.memory.role == 'carrier') {
+        else if(creep.memory.role == 'carrier') {
             roleCarrier.run(creep);
         }
-        if(creep.memory.role == 'builder') {
+        else if(creep.memory.role == 'builder') {
             roleBuilder.run(creep);
         }
-        if(creep.memory.role == 'upgrader') {
+        else if(creep.memory.role == 'upgrader') {
             roleUpgrader.run(creep);
+        }
+        else if(creep.memory.role == 'conqueror') {
+            roleConqueror.run(creep);
+        }
+        else if(creep.memory.role == 'trucker') {
+            roleTrucker.run(creep);
         }
     }
 

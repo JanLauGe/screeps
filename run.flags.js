@@ -133,7 +133,7 @@ var runFlags = {
                 }
 
                 // If room is not open, send a single creep to reserve first
-                else if(typeof thisroom == 'undefined') {
+                if(typeof thisroom == 'undefined') {
                     if (contains(operations, operation)) {
                         // do nothing
                     }
