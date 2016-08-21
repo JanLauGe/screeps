@@ -141,7 +141,7 @@ var runFlags = {
                     else if(!contains(conquerorOperations, operation)) {
                         // spawn worker for this source
                         console.log('spawning conqueror for operation' + operation)
-                        closestSpawn.spawnWorker(
+                        closestSpawn.spawnConqueror(
                             closestSpawn.room.energyCapacityAvailable,
                             operation,
                             'none')
