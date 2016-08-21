@@ -7,14 +7,17 @@ var roleWorker = {
         var target = creep.memory.target
         var flag = Game.flags['mining_' + operation]
         var remote = (flag.pos.roomName !== Game.getObjectById(flag.memory.spawn).room.name)
+        var constructionsites = creep.room.find(FIND_CONSTRUCTION_SITES)
 
         // If remote and if in room and if energy full, build!
         if (remote &&
             creep.room.name === flag.pos.roomName &&
-            _.sum(creep.carry) === creep.carryCapacity) {
+            _.sum(creep.carry) === creep.carryCapacity &&
+            constructionsites.length > 0) {
             creep.memory.mode = 'building'
         }
-        else if (_.sum(creep.carry) == 0) {
+        else if (_.sum(creep.carry) == 0 ||
+            constructionsites.length < 1) {
             creep.memory.mode = 'working'
         }
 
