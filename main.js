@@ -30,42 +30,6 @@ module.exports.loop = function () {
 
     setupMemory.run()
 
-    //## RUN CREEPS ------------------------------------------------------------
-    for(creepname in Game.creeps) {
-        var creep = Game.creeps[creepname];
-
-        if(creep.memory.role == 'generalist') {
-            roleGeneralist.run(creep);
-        }
-        else if(creep.memory.role == 'worker') {
-            roleWorker.run(creep);
-        }
-        else if(creep.memory.role == 'carrier') {
-            roleCarrier.run(creep);
-        }
-        else if(creep.memory.role == 'builder') {
-            roleBuilder.run(creep);
-        }
-        else if(creep.memory.role == 'upgrader') {
-            roleUpgrader.run(creep);
-        }
-        else if(creep.memory.role == 'conqueror') {
-            roleConqueror.run(creep);
-        }
-        else if(creep.memory.role == 'trucker') {
-            roleTrucker.run(creep);
-        }
-        else if(creep.memory.role == 'defender') {
-            roleDefender.run(creep);
-        }
-        else if(creep.memory.role == 'warrior') {
-            roleWarrior.run(creep);
-        }
-        else if(creep.memory.role == 'healer') {
-            roleHealer.run(creep);
-        }
-    }
-
     //## RUN FLAGS -------------------------------------------------------------
     //for(i in Game.flags) {
     //    console.log(JSON.stringify(Game.flags[i]))
@@ -111,6 +75,42 @@ module.exports.loop = function () {
         //## NEUTRAL ROOMS
         else if(typeof thisroom.controller.owner == 'undefined') {
 
+        }
+    }
+
+    //## RUN CREEPS ------------------------------------------------------------
+    for(creepname in Game.creeps) {
+        var creep = Game.creeps[creepname];
+
+        if(creep.memory.role == 'generalist') {
+            roleGeneralist.run(creep);
+        }
+        else if(creep.memory.role == 'worker') {
+            roleWorker.run(creep);
+        }
+        else if(creep.memory.role == 'carrier') {
+            roleCarrier.run(creep);
+        }
+        else if(creep.memory.role == 'builder') {
+            roleBuilder.run(creep);
+        }
+        else if(creep.memory.role == 'upgrader') {
+            roleUpgrader.run(creep);
+        }
+        else if(creep.memory.role == 'conqueror') {
+            roleConqueror.run(creep);
+        }
+        else if(creep.memory.role == 'trucker') {
+            roleTrucker.run(creep);
+        }
+        else if(creep.memory.role == 'defender') {
+            roleDefender.run(creep);
+        }
+        else if(creep.memory.role == 'warrior') {
+            roleWarrior.run(creep);
+        }
+        else if(creep.memory.role == 'healer') {
+            roleHealer.run(creep);
         }
     }
 };

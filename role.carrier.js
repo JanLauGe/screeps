@@ -28,7 +28,7 @@ var roleCarrier = {
         if (creep.memory.mode == 'loading') {
 
             var allJobs = []
-            for(j = 0; j < Memory.byroom[creep.room.name].jobs.pickups.length; j++){
+            for(j = 0; j < Mempath.jobs.pickups.length; j++){
                 allJobs.push(Game.getObjectById(Memory.byroom[creep.room.name].jobs.pickups[j]))
             }
             var myJob = creep.pos.findClosestByRange(allJobs)
