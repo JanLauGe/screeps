@@ -172,7 +172,7 @@ var runFlags = {
                                 }
 
                                 //## Assign truckers
-                                else if (!contains(truckerTargets, source.id)) {
+                                else if (!containsTwo(truckerTargets, source.id)) {
                                     // spawn trucker for this source
                                     // console.log(
                                     //     closestSpawn.name +

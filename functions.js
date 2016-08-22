@@ -2,7 +2,7 @@ var functions = {
 
     run: function() {
 
-        // Custom function for array duplicates
+        // Custom function to check array for a value
         contains = function(a, obj) {
             for (var i = 0; i < a.length; i++) {
                 if (a[i] === obj) {
@@ -10,6 +10,22 @@ var functions = {
                 }
             }
             return false;
+        }
+
+        // Custom function to check for double values
+        containsTwo = function(a, obj) {
+            var count = 0
+            for (var i = 0; i < a.length; i++) {
+                if (a[i] === obj) {
+                    var count = count + 1;
+                }
+            }
+            if (count >= 2) {
+                return true;
+            }
+            else if (count < 2) {
+                return false;
+            }
         }
 
         // Function to find odd or even numbers
