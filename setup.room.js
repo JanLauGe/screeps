@@ -28,15 +28,15 @@ var setupRoom = {
             'creeps_generalists' : 0,
             'creeps_workers' : 2,
             'creeps_carriers' : 2,
-            'creeps_builders' : 0,
-            'creeps_upgraders' : 1,
+            'creeps_builders' : 1,
+            'creeps_upgraders' : 2,
         };
         var roomSettings5 = {
             'creeps_generalists' : 0,
             'creeps_workers' : 2,
             'creeps_carriers' : 2,
-            'creeps_builders' : 0,
-            'creeps_upgraders' : 1,
+            'creeps_builders' : 1,
+            'creeps_upgraders' : 2,
         };
 
         Memory.byroom[thisroom.name] = {};

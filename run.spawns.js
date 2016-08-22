@@ -11,22 +11,34 @@ var runSpawns = {
         // Workers are spawned via run.flags
         if (spawningQueue[0] == 'carrier') {
             if (spawn.spawnCarrier(EnergyCapacity) == ERR_NOT_ENOUGH_RESOURCES) {
-                console.log(spawn.room.name + ' is waiting for resources to spawn carrier')
+                console.log('...' + spawn.room.name + ' gathering for carrier')
+            }
+            else {
+                console.log('...' + spawn.room.name + ' spawning carrier')
             }
         }
         else if (spawningQueue[0] == 'generalist') {
             if (spawn.spawnGeneralist(EnergyCapacity) == ERR_NOT_ENOUGH_RESOURCES) {
-                console.log(spawn.room.name + ' is waiting for resources to spawn generalist')
+                console.log('...' + spawn.room.name + ' gathering for generalist')
+            }
+            else {
+                console.log('...' + spawn.room.name + ' spawning generalist')
             }
         }
         else if (spawningQueue[0] == 'builder') {
             if (spawn.spawnBuilder(EnergyCapacity) == ERR_NOT_ENOUGH_RESOURCES) {
-                console.log(spawn.room.name + ' is waiting for resources to spawn builder')
+                console.log('...' + spawn.room.name + ' gathering for builder')
+            }
+            else {
+                console.log('...' + spawn.room.name + ' spawning builder')
             }
         }
         else if (spawningQueue[0] == 'upgrader') {
             if (spawn.spawnUpgrader(EnergyCapacity) == ERR_NOT_ENOUGH_RESOURCES) {
-                console.log(spawn.room.name + ' is waiting for resources to spawn upgrader')
+                console.log('...' + spawn.room.name + ' gathering for upgrader')
+            }
+            else {
+                console.log('...' + spawn.room.name + ' spawning upgrader')
             }
         }
     }

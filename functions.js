@@ -113,7 +113,8 @@ var functions = {
         // Function for spawning a builder
         StructureSpawn.prototype.spawnBuilder = function(energy) {
             var body = [];
-            var numberOfSegments = Math.floor(energy / 200);
+            var maxSegments = 10;
+            var numberOfSegments = Math.min(maxSegments, Math.floor(energy / 200));
             for (i = 0; i < numberOfSegments; i++) {
                 body.push(WORK);
                 body.push(CARRY);

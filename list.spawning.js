@@ -8,7 +8,9 @@ var listSpawning = {
         // Compare number of creeps to settings
         function needsSpawning(thisroom, creeprole) {
             if (Mempath.creeps[creeprole + 's'].length < Mempath.settings['creeps_' + creeprole + 's']) {
-                Mempath.spawningQueue.push(creeprole)
+                if (!contains(Mempath.spawningQueue, creeprole)) {
+                    Mempath.spawningQueue.push(creeprole)
+                }
             }
         }
 

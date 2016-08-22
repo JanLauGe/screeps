@@ -60,10 +60,10 @@ var roleTrucker = {
                 if (creep.room.name === thisflag.pos.roomName) {
 
                     // Maintain road network in foreign room
-                    var jobs = creep.pos.findInRange(FIND_STRUCTURES, {
+                    var jobs = creep.pos.findInRange(FIND_STRUCTURES, 4, {
                         filter: (structure) => {return (
                             (structure.structureType == 'road' && structure.hits < 4000) ||
-                            (structure.structureType == 'container' && structure.hits < 200000))}}, 4);
+                            (structure.structureType == 'container' && structure.hits < 200000))}});
                     for(j in jobs){
                         creep.repair(jobs[j])
                     }
