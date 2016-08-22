@@ -26,7 +26,11 @@ var roleWorker = {
             var jobs = creep.room.find(FIND_CONSTRUCTION_SITES)
             var job = creep.pos.findClosestByRange(jobs)
 
-            if(creep.build(job) == ERR_NOT_IN_RANGE) {
+            var droppedenergy = creep.pos.lookFor(LOOK_ENERGY)
+            if (droppedenergy.length) {
+                creep.pickup(droppedenergy)
+            }
+            if (creep.build(job) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(job)
             }
         }
