@@ -202,7 +202,9 @@ var functions = {
         // Function for spawning a warrior
         StructureSpawn.prototype.spawnWarrior = function(energy) {
             var body = []
-            var numberOfSegments = Math.floor((energy - 250) / 130);
+            var maxSegments = 20;
+            var numberOfSegments = Math.min(Math.floor((energy - 250) / 130),maxSegments);
+            body.push([TOUGH,TOUGH,TOUGH,TOUGH,MOVE,MOVE,MOVE,MOVE])
             for (i = 0; i < numberOfSegments; i++) {
                 body.push(ATTACK);
                 body.push(MOVE);
@@ -220,7 +222,8 @@ var functions = {
         // Function for spawning a healer
         StructureSpawn.prototype.spawnHealer = function(energy) {
             var body = []
-            var numberOfSegments = Math.floor(energy / 300);
+            var maxSegments = 25;
+            var numberOfSegments = Math.min(Math.floor(energy / 300),maxSegments);
             for (i = 0; i < numberOfSegments; i++) {
                 body.push(HEAL);
                 body.push(MOVE);

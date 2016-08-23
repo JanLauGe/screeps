@@ -6,7 +6,10 @@ var roleWarrior = {
         var attackrange = 50;
 
         // Mode definition ---------------------------------------------------------
-        if (typeof Game.flags.attack !== 'undefined') {
+        if (typeof Game.flags.assemble !== 'undefined') {
+            var destination = Game.flags.assemble
+        }
+        else if (typeof Game.flags.attack !== 'undefined') {
             var destination = Game.flags.attack
         }
 
@@ -49,8 +52,8 @@ var roleWarrior = {
             else {
                 var enemyFighters = creep.room.find(FIND_HOSTILE_CREEPS)
                 var enemyBuildings = creep.room.find(FIND_HOSTILE_STRUCTURES)
-                if (typeof enemyFighters != 'undefined') {
-                    if (enemyFighters != null) {
+                if (typeof enemyFighters !== 'undefined') {
+                    if (enemyFighters !== null) {
                         if (enemyFighters.length > 0){
                             var enemyFighter = creep.pos.findClosestByPath(enemyFighters)
                             if (creep.attack(enemyFighter) == ERR_NOT_IN_RANGE) {

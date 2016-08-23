@@ -3,24 +3,27 @@ var roleHealer = {
     run: function(creep) {
 
     // *** MODE DEFINITION ***
-        if (typeof Game.flags.heal !== 'undefined') {
-            var target = Game.flags.heal
+        if (typeof Game.flags.assemble !== 'undefined') {
+            var destination = Game.flags.assemble
+        }
+        else if (typeof Game.flags.heal !== 'undefined') {
+            var destination = Game.flags.heal
         }
         else if (typeof Game.flags.attack !== 'undefined') {
-            var target = Game.flags.attack
+            var destination = Game.flags.attack
         }
         else if (typeof Game.flags.conquer !== 'undefined') {
-            var target = Game.flags.conquer
+            var destination = Game.flags.conquer
         }
 
 
-        if (target) {
+        if (typeof destination !== 'undefined') {
             // If in other room: move
-            if (target.pos.roomName !== creep.room.name) {
+            if (destination.pos.roomName !== creep.room.name) {
                 creep.memory.mode = 'move';
                 creep.say('move out')
             }
-            else if(target.pos.roomName === creep.room.name) {
+            else if(destination.pos.roomName === creep.room.name) {
                 creep.memory.mode = 'heal'
             }
         }
@@ -28,7 +31,7 @@ var roleHealer = {
 
         // *** MODE EXECUTION ***
         if(creep.memory.mode === 'move') {
-            creep.moveTo(target)
+            creep.moveTo(destination)
         }
         else if(creep.memory.mode === 'heal') {
             var patients = creep.room.find(FIND_MY_CREEPS, {
@@ -42,7 +45,7 @@ var roleHealer = {
                 }
             }
             else{
-                creep.moveTo(target)
+                creep.moveTo(destination)
             }
         }
     }
