@@ -204,7 +204,6 @@ var functions = {
             var body = []
             var maxSegments = 20;
             var numberOfSegments = Math.min(Math.floor((energy - 250) / 130),maxSegments);
-            body.push([TOUGH,TOUGH,TOUGH,TOUGH,MOVE,MOVE,MOVE,MOVE])
             for (i = 0; i < numberOfSegments; i++) {
                 body.push(ATTACK);
                 body.push(MOVE);

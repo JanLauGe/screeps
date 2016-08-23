@@ -3,17 +3,11 @@ var roleHealer = {
     run: function(creep) {
 
     // *** MODE DEFINITION ***
-        if (typeof Game.flags.assemble !== 'undefined') {
-            var destination = Game.flags.assemble
-        }
-        else if (typeof Game.flags.heal !== 'undefined') {
+        if (typeof Game.flags.heal !== 'undefined') {
             var destination = Game.flags.heal
         }
-        else if (typeof Game.flags.attack !== 'undefined') {
-            var destination = Game.flags.attack
-        }
-        else if (typeof Game.flags.conquer !== 'undefined') {
-            var destination = Game.flags.conquer
+        else if (typeof Game.flags.assemble !== 'undefined') {
+            var destination = Game.flags.assemble
         }
 
 

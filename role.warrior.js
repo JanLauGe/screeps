@@ -6,12 +6,13 @@ var roleWarrior = {
         var attackrange = 50;
 
         // Mode definition ---------------------------------------------------------
-        if (typeof Game.flags.assemble !== 'undefined') {
-            var destination = Game.flags.assemble
-        }
-        else if (typeof Game.flags.attack !== 'undefined') {
+        if (typeof Game.flags.attack !== 'undefined') {
             var destination = Game.flags.attack
         }
+        else if (typeof Game.flags.assemble !== 'undefined') {
+            var destination = Game.flags.assemble
+        }
+
 
         if (typeof destination !== 'undefined') {
             // If in other room: move
