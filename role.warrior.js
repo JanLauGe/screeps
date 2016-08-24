@@ -3,7 +3,7 @@ var roleWarrior = {
 
     run: function(creep) {
 
-        var attackrange = 50;
+        var attackrange = 5;
 
         // Mode definition ---------------------------------------------------------
         if (typeof Game.flags.attack !== 'undefined') {
@@ -35,7 +35,10 @@ var roleWarrior = {
             // If target is set via target1 flag
             if (typeof Game.flags.target1 !== 'undefined') {
                 if (Game.flags.target1.pos.roomName == destination.pos.roomName) {
-                    var targets = Game.flags.target1.pos.findInRange(FIND_HOSTILE_CREEPS, attackrange)
+                    var targets = Game.flags.target1.pos.findInRange(
+                      FIND_HOSTILE_CREEPS, attackrange,
+                      { filter: (hostile) => {
+                        return (!contains(Memory.global.diplomacy.allies, hostile.owner.username))}})
                     var target = creep.pos.findClosestByPath(targets)
 
                     if (target !== null) {
@@ -44,6 +47,9 @@ var roleWarrior = {
                             creep.moveTo(target)
                         }
                     }
+                    else if(creep.hits < creep.hitsMax) {
+                        creep.heal(creep)
+                    }
                     else {
                         creep.moveTo(Game.flags.target1)
                     }
@@ -51,27 +57,27 @@ var roleWarrior = {
             }
             // If not target flag
             else {
-                var enemyFighters = creep.room.find(FIND_HOSTILE_CREEPS)
-                var enemyBuildings = creep.room.find(FIND_HOSTILE_STRUCTURES)
-                if (typeof enemyFighters !== 'undefined') {
-                    if (enemyFighters !== null) {
-                        if (enemyFighters.length > 0){
-                            var enemyFighter = creep.pos.findClosestByPath(enemyFighters)
-                            if (creep.attack(enemyFighter) == ERR_NOT_IN_RANGE) {
-                                creep.moveTo(enemyFighter)
-                            }
-                        }
+                var enemyFighters = creep.room.find(FIND_HOSTILE_CREEPS,
+                  { filter: (hostile) => {
+                  return (!contains(Memory.global.diplomacy.allies, hostile.owner.username))}}))
+                var enemyBuildings = creep.room.find(FIND_HOSTILE_STRUCTURES,
+                  { filter: (hostile) => {
+                    return (!contains(Memory.global.diplomacy.allies, hostile.owner.username))}}))
+
+                if (enemyFighters.length > 0) {
+                    var enemyFighter = creep.pos.findClosestByPath(enemyFighters)
+                    if (creep.attack(enemyFighter) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(enemyFighter)
                     }
                 }
-                else if (typeof enemyBuildings != 'undefined') {
-                    if (enemyBuildings != null) {
-                        if (enemyBuilding.length > 0){
-                            var enemyBuilding = creep.pos.findClosestByPath(enemyBuildings)
-                            if (creep.attack(enemyBuilding) == ERR_NOT_IN_RANGE) {
-                                creep.moveTo(enemyBuilding)
-                            }
-                        }
+                else if (enemyBuildings.length > 0) {
+                    var enemyBuilding = creep.pos.findClosestByPath(enemyBuildings)
+                    if (creep.attack(enemyBuilding) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(enemyBuilding)
                     }
+                }
+                else if(creep.hits < creep.hitsMax) {
+                    creep.heal(creep)
                 }
                 else {
                     creep.moveTo(destination)

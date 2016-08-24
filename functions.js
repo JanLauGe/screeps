@@ -208,6 +208,7 @@ var functions = {
                 body.push(ATTACK);
                 body.push(MOVE);
             }
+            body.push(MOVE)
             body.push(HEAL)
             return this.createCreep(
                 body, Spawn.prototype.getCreepName('warrior'), {

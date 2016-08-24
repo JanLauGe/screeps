@@ -16,9 +16,9 @@ for(var i in Memory.global.creeps) {
 Memory.global = {}
 Memory.global.diplomacy = {
     'war' : false,
-    'peace' : true,
+    'calltoarms' : true;
     'enemies' : ['AndrolGenhald','Tardigrade','cazantyl'],
-    'allies' : undefined,
+    'allies' : ['linucc'],
     'neutral' : undefined};
 Memory.global.creeps = {};
 Memory.byroom = {};

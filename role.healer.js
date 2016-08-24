@@ -24,23 +24,36 @@ var roleHealer = {
 
 
         // *** MODE EXECUTION ***
-        if(creep.memory.mode === 'move') {
-            creep.moveTo(destination)
-        }
-        else if(creep.memory.mode === 'heal') {
-            var patients = creep.room.find(FIND_MY_CREEPS, {
-                filter: (patient) => {
-                return (patient.hits < patient.hitsMax)}});
-            var patient = creep.pos.findClosestByPath(patients)
+        var patients = creep.room.find(FIND_MY_CREEPS, {
+            filter: (patient) => {
+            return (patient.hits < patient.hitsMax)}});
+        var patient = creep.pos.findClosestByPath(patients)
+        console.log(patient == null)
 
-            if (patient) {
+        if (creep.hits < creep.hitsMax) {
+            creep.heal(creep)
+        }
+        if (creep.memory.mode === 'move') {
+            creep.moveTo(destination)
+            //if (typeof patient !== null) {
+            //    if (creep.heal(patient) == ERR_NOT_IN_RANGE) {
+            //        creep.rangedHeal(patient)
+            //    }
+            //}
+        }
+        else if (creep.memory.mode === 'heal') {
+            if (patient !== null) {
                 if (creep.heal(patient) == ERR_NOT_IN_RANGE) {
+                    creep.rangedHeal(patient)
                     creep.moveTo(patient)
                 }
             }
-            else{
+            else {
                 creep.moveTo(destination)
             }
+        }
+        else {
+            creep.moveTo(destination)
         }
     }
 };
