@@ -27,16 +27,6 @@ module.exports = {
             var closestSpawn = Game.getObjectById(thisflag.memory.spawn);
         }
         
-        //console.log('this creep:')
-        //console.log(creep.memory.operation)
-        //console.log(creep.memory.mode)
-        //console.log('current room')
-        //console.log(creep.room.name)
-        //console.log(operation != undefined &&
-        //        thisflag != undefined)
-        //console.log('in target room?')
-        //console.log(creep.room.name == thisflag.pos.roomName)
-        
         if (creep.memory.mode == 'loading') {
 
             if (operation != undefined &&

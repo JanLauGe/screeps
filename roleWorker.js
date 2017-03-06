@@ -20,8 +20,10 @@ module.exports = {
         // Find target ---------------------------------------------------------
         if (typeof creep.memory.operation === 'undefined' ||
             creep.memory.operation === creep.room.name) {
+                
             if (typeof creep.memory.target === 'undefined' ||
                 creep.memory.target === '') {
+                    
                 // Select sources
                 if (sources.length) {
                     var source = _.sortByOrder(sources, 'work', 'desc')[0].id;
@@ -32,9 +34,11 @@ module.exports = {
             // Block target --------------------------------------------------------
             // Find target source
             var source = Game.getObjectById(creep.memory.target)
+            
             // Substract from source budget
             var sourceIndex = _.findIndex(mem.sources, {'id': creep.memory.target});
             var parts = _.filter(creep.body, {'type': WORK}).length
+            
             mem.sources[sourceIndex]['slots'] = mem.sources[sourceIndex]['slots'] - 1;
             mem.sources[sourceIndex]['work'] = mem.sources[sourceIndex]['work'] - parts;
         }

@@ -150,7 +150,7 @@ module.exports = {
             // Deliver to terminal
             else if(typeof creep.room.terminal !== 'undefined' &&
                 _.sum(creep.room.terminal.store) < creep.room.terminal.storeCapacity &&
-                _.sum(creep.room.terminal.store.energy) < (creep.room.terminal.storeCapacity / 2)) {
+                creep.room.terminal.store.energy < 100000) {
                 if (_.sum(creep.room.terminal.store.energy) < creep.room.terminal.storeCapacity) {
                     if (creep.transfer(creep.room.terminal, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(creep.room.terminal);

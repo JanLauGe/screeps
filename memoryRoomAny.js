@@ -46,7 +46,6 @@ var memoryRoomAny = {
                     source.pos.y + 1, source.pos.x + 1, {asArray: true});
                 // Count open fields around sources 
                 var plain = _.countBy(terrain, 'terrain').plain + _.countBy(terrain, 'terrain').swamp;
-                console.log(plain)
                 var thisSource = {
                     id: source.id,
                     plain: plain

@@ -51,18 +51,28 @@ module.exports = {
 
         // Execute tasks =======================================================
         if (creep.memory.mode === 'loading') {
-            if (creep.room.storage !== undefined &&
+            if (typeof creep.room.storage !== 'undefined' &&
                 creep.room.storage.store[RESOURCE_ENERGY] > 0) {
                 if (creep.withdraw(creep.room.storage, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                     creep.moveTo(creep.room.storage);
                 }
             }
             else {
-                // If pickup locations: pickup
+                var drops = (creep.room.find(FIND_DROPPED_RESOURCES, {
+                    filter: {resourceType: RESOURCE_ENERGY}}));
+                var drop = creep.pos.findClosestByRange(drops)
+
+                if (creep.pickup(drop) === ERR_NOT_IN_RANGE) {
+                    creep.moveTo(drop);
+                }
+                
+/*                // If pickup locations: pickup
                 if (jobsPickup.length > 0) {
                     var myJob = creep.pos.findClosestByRange(jobsPickup)
                     //var myJob = _.orderBy(allJobs, RESOURCE_ENERGY, 'desc');
-
+                    
+                    console.log(JSON.stringify(myJob))
+                    
                     // Execute job
                     if (myJob instanceof Creep) {
                         if (myJob.transfer(creep, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
@@ -81,7 +91,7 @@ module.exports = {
                             creep.moveTo(myJob)
                         }
                     }
-                }
+                }*/
             }
         }
 

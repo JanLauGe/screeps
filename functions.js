@@ -125,9 +125,14 @@ var functions = {
         }
 
         // Function for spawning a Generalist
-        StructureSpawn.prototype.spawnGeneralist = function(energy) {
+        StructureSpawn.prototype.spawnGeneralist = function(energy, operation) {
+            if (typeof operation == 'undefined') {
+                var operation = this.room.name
+            }
             var body = [];
-            var numberOfSegments = Math.floor(energy / 200);
+            var maxSegments = 16;
+            var numberOfSegments = Math.min(maxSegments,
+                Math.floor(energy / 200));
             for (i = 0; i < numberOfSegments; i++) {
                 body.push(WORK);
                 body.push(CARRY);
@@ -138,6 +143,7 @@ var functions = {
                     role: 'generalist',
                     serial: Spawn.prototype.getSerial('generalist'),
                     origin: this.room.name,
+                    operation: operation,
                     task: '',
                     target: ''
                 }
@@ -149,7 +155,7 @@ var functions = {
             var body = [];
             var maxSegments = 20;
             var numberOfSegments = Math.min(maxSegments,
-              Math.floor((energy - 150) / 100));
+                Math.floor((energy - 150) / 100));
             for (i = 0; i < numberOfSegments; i++) {
                 body.push(CARRY);
                 body.push(MOVE);
@@ -264,7 +270,7 @@ var functions = {
         }
 
         // Function for spawning a Worker
-        StructureSpawn.prototype.spawnWorker = function(energy, operation) {
+        StructureSpawn.prototype.spawnWorker = function(energy, operation, target) {
             var body = [];
             if (energy <= 500) {
                 var body = [MOVE,WORK,CARRY]
@@ -288,7 +294,7 @@ var functions = {
                     origin: this.room.name,
                     operation: operation,
                     task: '',
-                    target: ''
+                    target: target
                 }
             )
         }

@@ -17,8 +17,10 @@ var memoryRoomMine = {
         if (typeof mem.posSpawn === 'undefined') {
             var spawn = room.find(FIND_STRUCTURES, {
                 filter: (structure) => {return (structure.structureType == STRUCTURE_SPAWN)}});
-            var spawn = spawn[0];
-            mem.posSpawn = {x: spawn.pos.x, y:spawn.pos.y};
+            if (spawn.length) {
+                var spawn = spawn[0];
+                mem.posSpawn = {x: spawn.pos.x, y:spawn.pos.y};
+            }
         }
 
 
@@ -31,11 +33,13 @@ var memoryRoomMine = {
             {filter: (dropped) => {return (dropped.energy > (room.carryCapacity / 3))}});
         // Find energy sinks
         var sinks = room.find(FIND_STRUCTURES, {
-            filter: (structure) => {return (
+            filter: (structure) => {return (((
                 structure.structureType == STRUCTURE_EXTENSION ||
                 structure.structureType == STRUCTURE_SPAWN ||
                 structure.structureType == STRUCTURE_TOWER) &&
-                structure.energy < structure.energyCapacity;}});
+                structure.energy < structure.energyCapacity) ||
+                (structure.structureType == STRUCTURE_TERMINAL &&
+                structure.store.energy < 10000));}});
         // Find links
         var links = room.find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_LINK}});
         
@@ -70,8 +74,8 @@ var memoryRoomMine = {
         //    }
         //}
         // Any dropped ressources 100+
-        var drops = (room.find(FIND_DROPPED_RESOURCES, {
-            filter: {resourceType: RESOURCE_ENERGY}}))
+        var drops = (room.find(FIND_DROPPED_RESOURCES))//, {
+            //filter: {resourceType: RESOURCE_ENERGY}}))
         if (drops.length) {
             for(var i = 0; i < drops.length; i++) {
                 var drop = drops[i]
@@ -93,9 +97,8 @@ var memoryRoomMine = {
             }
         }
         
+
         // Run Links -----------------------------------------------------------
-        
-        
         
         //Links given my run.links
         //var links = mem.links
@@ -277,7 +280,7 @@ var memoryRoomMine = {
             }
             
             // If there is an extractor, there should be a miner
-            if (Game.rooms.W2N5.find(FIND_MY_STRUCTURES, { 
+            if (room.find(FIND_MY_STRUCTURES, { 
                 filter: { structureType: STRUCTURE_EXTRACTOR}}).length) {
                 popTarget['miner'] = 1;
             }
@@ -310,25 +313,24 @@ var memoryRoomMine = {
 
 
         // Restart room ========================================================
-        if (room.energyCapacityAvailable <= 800) {
-            if (pop['generalist'] === 0) {
-                var spawns = room.find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_SPAWN}});
+        if (pop['generalist'] === 0 && 
+            pop['carrier'] === 0) {
+            var spawns = room.find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_SPAWN}});
+            if (spawns.length) {
                 var spawn = _.sortByOrder(spawns, 'energy', 'desc')[0];
-                spawn.spawnGeneralist(spawn.room.energyAvailable)
-            }
-        }
-        else if (room.energyCapacityAvailable > 800) {
-            if (pop['carrier'] === 0 && pop['worker'] === 0 && pop['generalist'] === 0) {
-                // If storage is non-empty
-                if (room.storage.store[RESOURCE_ENERGY] > 1000) {
-                    var spawns = room.find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_SPAWN}});
-                    var spawn = _.sortByOrder(spawns, 'energy', 'desc')[0];
-                    spawn.spawnCarrier(spawn.room.energyAvailable);
+                
+                if (room.energyCapacityAvailable <= 800) {
+                    spawn.spawnGeneralist(spawn.room.energyAvailable)
                 }
-                else {
-                    var spawns = room.find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_SPAWN}});
-                    var spawn = _.sortByOrder(spawns, 'energy', 'desc')[0];
-                    spawn.spawnGeneralist(spawn.room.energyAvailable);
+                else if (room.energyCapacityAvailable > 800) {
+                    // If storage is non-empty
+                    if (typeof room.storage !== 'undefined' &&
+                        room.storage.store[RESOURCE_ENERGY] > 1000) {
+                        spawn.spawnCarrier(spawn.room.energyAvailable);
+                    }
+                    else {
+                        spawn.spawnGeneralist(spawn.room.energyAvailable);
+                    }
                 }
             }
         }
