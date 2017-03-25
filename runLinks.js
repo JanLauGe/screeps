@@ -1,52 +1,49 @@
 module.exports = {
-    
-    assign: function(links) {
-        
-        mem = Memory.rooms[links[0].room.name]
-        for (i = 0; i < links.length; i++) {
-            
-            var link = links[i]
-            var flag = link.pos.lookFor(LOOK_FLAGS)
-            
-            // Find flag to distinguish sources and flags
-            if (flag.length) {
-                if (_.startsWith(flag[0].name, 'sink')) {
-                    mem.links_sinks.push(link.id)
-                }
-                else if (_.startsWith(flag[0].name, 'source') &&
-                    link.energy < link.energyCapacity) {
-                    mem.links_sources.push(link.id)
-                }
-            }
-            // For unflagged links, decide based on energy
-            else if (flag === '') {
-                if (link.energy == 0) {
-                    mem.links_sinks.push(link.id)
-                }
-                else if(link.energy == link.energyCapacity) {
-                    mem.links_sources.push(link.id)
-                }
-                else {
-                    mem.links_trans.push(link.id)
-                }
-            }
-        }
-    },
 
-    run: function(room) {
-        
-        var mem = Memory.rooms[room.name]
-        
-        for (i = 0; i < mem.links_sinks.length; i++) {
-            var link = Game.getObjectById(mem.links_sinks[i]);
-            
-            // Push link_sinks to sinks list
-            if (link.energy < link.energyCapacity) {
-                mem.objectsSinks.push(link)
+    run: function(links) {
+
+        // Find sinks and sources
+        var links_sinks = []
+        var links_trans = []
+        var links_sources = []
+        //Memory.rooms[links[0].room.name].links_sinks = [];
+        //Memory.rooms[links[0].room.name].links_trans = [];
+
+        if (links.length) {
+            for (i = 0; i < links.length; i++) {
+
+                var link = links[i]
+                var flag = link.pos.lookFor(LOOK_FLAGS)
+                // Find flag to distinguish sources and flags
+                if (flag.length) {
+                    if (_.startsWith(flag[0].name, 'sink')) {
+                        links_sinks.push(link)
+                        Memory.rooms[links[0].room.name].links_sinks.push(link.id)
+                    }
+                    else if (_.startsWith(flag[0].name, 'source') &&
+                        link.energy < link.energyCapacity) {
+                        links_sources.push(link)
+                    }
+                }
+                // For unflagged links, decide based on energy
+                else if (flag == '') {
+                    if (link.energy == 0) {
+                        links_sinks.push(link)
+                    }
+                    else if(link.energy == link.energyCapacity) {
+                        links_sources.push(link)
+                    }
+                    else {
+                        links_trans.push(link)
+                    }
+                }
             }
-            
+            Memory.rooms[links[0].room.name].links_trans = links_trans
+
             // Conduct transfer
-            link.transferEnergy(Game.getObjectById(mem.links_sources[0]))
+            for (i = 0; i < links_sinks.length; i++) {
+                links_sinks[i].transferEnergy(links_sources[0])
+            }
         }
     }
 };

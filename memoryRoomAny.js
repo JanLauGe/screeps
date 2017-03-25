@@ -6,18 +6,19 @@ var memoryRoomAny = {
         var mem = Memory.rooms[room.name];
 
         // Static room properties ==============================================
-        
+
         // If memory object does not exist yet
         if (typeof mem === 'undefined') {
 
             // Create object slot
             Memory.rooms[room.name] = {};
             var mem = Memory.rooms[room.name];
-            
+
             // Create room object ----------------------------------------------
             // Get room type
             if (typeof room.controller === 'undefined') {
-                if (sources.length) {
+                if (sources !== undefined &&
+                    sources.length) {
                     // Must be central room
                     var roomType = 'central';
                 }
@@ -44,7 +45,7 @@ var memoryRoomAny = {
                 var terrain = room.lookForAtArea('terrain',
                     source.pos.y - 1, source.pos.x - 1,
                     source.pos.y + 1, source.pos.x + 1, {asArray: true});
-                // Count open fields around sources 
+                // Count open fields around sources
                 var plain = _.countBy(terrain, 'terrain').plain + _.countBy(terrain, 'terrain').swamp;
                 var thisSource = {
                     id: source.id,

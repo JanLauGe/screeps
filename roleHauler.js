@@ -1,7 +1,7 @@
 module.exports = {
 
     getTask: function(creep) {
-        
+
         var operation = creep.memory.operation
 
         // If empty, load, if full, build
@@ -14,7 +14,7 @@ module.exports = {
     },
 
     getTarget: function(creep) {
-        
+
     },
 
     run: function(creep) {
@@ -22,11 +22,11 @@ module.exports = {
         var operation = creep.memory.operation
         var target = creep.memory.target
         var thisflag = Game.flags['mining_' + operation]
-        
+
         if (thisflag != undefined) {
             var closestSpawn = Game.getObjectById(thisflag.memory.spawn);
         }
-        
+
         if (creep.memory.mode == 'loading') {
 
             if (operation != undefined &&
@@ -38,7 +38,7 @@ module.exports = {
 
                 // Else if in this room
                 else if (creep.room.name == thisflag.pos.roomName) {
-                    
+
                     var dropped = creep.room.find(FIND_DROPPED_RESOURCES, {
                         filter: (ressource) => {return (
                             ressource.amount > 200)}});
@@ -113,7 +113,7 @@ module.exports = {
                             if (flag.length) {
                                 if (_.startsWith(flag[0].name, 'sink')) {
                                     links_sinks.push(link)
-                                    Memory.byroom[links[0].room.name].links.links_sinks.push(link.id)
+                                    Memory.rooms[link.room.name].links_sinks.push(link.id)
                                 }
                                 else if (_.startsWith(flag[0].name, 'source') &&
                                     link.energy < link.energyCapacity) {

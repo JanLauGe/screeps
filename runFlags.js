@@ -1,7 +1,7 @@
 module.exports = {
 
     run: function() {
-        
+
         // Get username
         var player = Game.spawns[Object.keys(Game.spawns)[0]].owner.username;
 
@@ -72,14 +72,14 @@ module.exports = {
             // Run mining flags ================================================
             if (i.substring(0, 6) == 'mining') {
                 var flag = Game.flags[i];
-                
+
                 // Setup flag --------------------------------------------------
                 // Operation name
                 if (typeof flag.memory.operation == 'undefined') {
                     var operation = i.substring(7, 15);
                     flag.memory.operation = operation;
                 }
-                
+
                 // Closest spawn
                 if (typeof flag.memory.spawn == 'undefined') {
                     var distanceToSpawn = Infinity;
@@ -88,25 +88,26 @@ module.exports = {
                         var thisDistance = Game.map.findRoute(
                             spawn.room.name,
                             flag.pos.roomName).length;
-                        if (thisDistance < distanceToSpawn) {
+                        if (thisDistance < distanceToSpawn &&
+                            spawn.room.controller.level > 0) {
                             var distanceToSpawn = thisDistance;
                             var closestSpawn = Game.spawns[j];
                         }
                     }
                     flag.memory.spawn = closestSpawn.id;
                 }
-                
+
                 var operation = flag.memory.operation;
                 var closestSpawn = Game.getObjectById(flag.memory.spawn);
-                
-                
+
+
                 // Run remote mining -------------------------------------------
                 if (closestSpawn.room.name != flag.pos.roomName) {
-                    
+
                     // If room is open
                     var thisroom = Game.rooms[flag.pos.roomName];
                     if (typeof thisroom != 'undefined') {
-                        
+
                         // Check for invaders
                         var invaders = thisroom.find(FIND_HOSTILE_CREEPS);
                         if (invaders.length &&
@@ -116,7 +117,7 @@ module.exports = {
                                 operation);
                         }
                         else {
-                            
+
                             // Find and assign sources
                             var sources = thisroom.find(FIND_SOURCES);
                             for(s in sources) {
@@ -161,12 +162,13 @@ module.exports = {
                     }
                 }
             }
-            
-            
+
+
             // Claim flag ======================================================
             else if (i.substring(0, 5) == 'claim') {
+                console.log('claim flag')
                 var flag = Game.flags[i];
-                
+
                 // Static variables --------------------------------------------
                 // Operation name
                 if (typeof flag.memory.operation == 'undefined' ||
@@ -174,7 +176,7 @@ module.exports = {
                     flag.memory.spawn = undefined;
                     flag.memory.operation = Game.flags[i].pos.roomName;
                 }
-                
+
                 // Closest spawn
                 if (typeof flag.memory.spawn == 'undefined') {
                     var distanceToSpawn = Infinity;
@@ -183,50 +185,59 @@ module.exports = {
                         var thisDistance = Game.map.findRoute(
                             spawn.room.name,
                             flag.pos.roomName).length;
-                        if (thisDistance < distanceToSpawn) {
+                        if (thisDistance < distanceToSpawn &&
+                            spawn.room.controller != undefined &&
+                            spawn.room.controller.owner != undefined &&
+                            spawn.room.controller.owner.username === 'JanLauGe' &&
+                            spawn.room.controller.level > 3) {
                             var distanceToSpawn = thisDistance;
                             var closestSpawn = Game.spawns[j];
                         }
                     }
                     flag.memory.spawn = closestSpawn.id;
                 }
-                
-                    
+
+
                 // Run claim flag ----------------------------------------------
                 var operation = Game.flags[i].memory.operation;
                 var operationRoom = Game.rooms[operation];
                 var closestSpawn = Game.getObjectById(flag.memory.spawn);
-                
+
                 // If room undiscovered
-                if ((typeof operationRoom == 'undefined' && !_.includes(conquerorOperations, operation)) ||
-                    // Or if room open and neutral
-                    (typeof operationRoom != 'undefined' && 
-                    operationRoom.controller.owner == 'undefined' && 
-                    !_.includes(conquerorOperations, operation))) {
-                        
+                if ((typeof operationRoom == 'undefined' ||
+                // Or if room open and neutral
+                    (operationRoom !== undefined &&
+                    operationRoom.controller.owner === undefined)) &&
+                    !_.includes(conquerorOperations, operation)) {
+
+                        console.log('undiscovered')
+
                     // Spawn conqueror
                     closestSpawn.spawnConqueror(
                         closestSpawn.room.energyCapacityAvailable,
                         operation,
                         'claim',
                         flag.name);
+                        console.log('spawning conqueror')
                 }
                 // If room is already claimed
-                else if (typeof operationRoom !== 'undefined' && 
+                else if (typeof operationRoom !== 'undefined' &&
                     typeof Game.rooms[operation].controller.owner !== 'undefined' &&
                     Game.rooms[operation].controller.owner.username === player) {
-                        
+
+                        console.log('already claimed')
+
                     if (typeof _.countBy(generalistOperations, _.identity)[operation] === 'undefined' ||
-                        _.countBy(generalistOperations, _.identity)[operation] < 10) {
+                        _.countBy(generalistOperations, _.identity)[operation] < 4) {
 
                         // Send pioneer
                         closestSpawn.spawnGeneralist(
                             closestSpawn.room.energyCapacityAvailable,
                             operation)
+                            console.log('spawning pioneer')
                     }
                 }
             }
         }
     }
 };
-

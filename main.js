@@ -51,6 +51,7 @@ var roleMiner = require('roleMiner');
 var roleUpgrader = require('roleUpgrader');
 var roleWarrior = require('roleWarrior');
 var roleWorker = require('roleWorker');
+var roleTrucker = require('roleTrucker');
 
 // Structures
 var runLabs = require('runLabs');
@@ -84,7 +85,7 @@ module.exports.loop = function() {
     for(var roomName in Game.rooms) {
         var room = Game.rooms[roomName];
         memoryRoomAny.setup(room);
-        
+
         // Not a central room (not without controller)
         if (room.controller != undefined) {
             // Not a neutral room (claimed)
@@ -112,9 +113,10 @@ module.exports.loop = function() {
                     // Run structures
                     runTowers.run(towers);
                     runSpawns.run(spawns);
-                    //runLinks.run(room);
+                    // Find links
+                    runLinks.run(links);
                     //runLabs.run(labs);
-                    runTerminal.run(terminal);
+                    runTerminal.list(terminal);
 
                 }
                 // Enemy rooms -------------------------------------------------
@@ -127,6 +129,25 @@ module.exports.loop = function() {
         //var lastcpu = Game.cpu.getUsed()
     }
 
+    // Separate room to balance minerals =======================================
+    for(var roomName in Game.rooms) {
+        var room = Game.rooms[roomName];
+        memoryRoomAny.setup(room);
+
+        // Not a central room (not without controller)
+        if (room.controller != undefined) {
+            // Not a neutral room (claimed)
+            if (room.controller.owner != undefined) {
+                // One of my rooms
+                if (room.controller.owner.username === 'JanLauGe') {
+
+                    var terminal = room.terminal;
+                    runTerminal.run(terminal);
+                }
+            }
+        }
+    }
+
 
     // Run creeps ==============================================================
     // If there is at least one creep
@@ -136,12 +157,12 @@ module.exports.loop = function() {
         for(var creepname in Game.creeps) {
             var creep = Game.creeps[creepname];
             var role = creep.memory.role;
-            
+
             // If role is missing, make into generalist
             if (typeof role === 'undefined') {
                 var role = 'generalist';
             }
-            
+
             // Run creep logic to get task based on role variable
             eval('role' +
                 role.charAt(0).toUpperCase() + role.slice(1) +

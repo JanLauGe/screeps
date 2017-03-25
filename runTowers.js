@@ -23,7 +23,7 @@ var runTowers = {
             // Each tower
             for(i in towers) {
                 var tower = towers[i]
-                
+
                 // Find hostile creeps
                 var hostiles = towers[0].room.find(FIND_HOSTILE_CREEPS, {
                     filter: (hostile) => {return (
@@ -38,6 +38,12 @@ var runTowers = {
                 // Conduct upkeep
                 else if (mem.joblistRepairRoads.length) {
                     tower.repair(Game.getObjectById(mem.joblistRepairRoads[0]));
+                }
+                else if (mem.joblistRepairRamps.length) {
+                    tower.repair(Game.getObjectById(mem.joblistRepairRamps[0]));
+                }
+                else if (mem.joblistRepairWalls.length) {
+                    tower.repair(Game.getObjectById(mem.joblistRepairWalls[0]));
                 }
             }
         }

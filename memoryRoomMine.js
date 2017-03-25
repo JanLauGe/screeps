@@ -1,7 +1,7 @@
 var memoryRoomMine = {
 
     setup: function(room){
-        
+
         var runLinks = require('runLinks');
         // Memory objects
         var mem = Memory.rooms[room.name];
@@ -35,18 +35,16 @@ var memoryRoomMine = {
         var sinks = room.find(FIND_STRUCTURES, {
             filter: (structure) => {return (((
                 structure.structureType == STRUCTURE_EXTENSION ||
-                structure.structureType == STRUCTURE_SPAWN ||
-                structure.structureType == STRUCTURE_TOWER) &&
+                structure.structureType == STRUCTURE_SPAWN) &&
                 structure.energy < structure.energyCapacity) ||
+                (structure.structureType == STRUCTURE_TOWER &&
+                structure.energy < structure.energyCapacity / 2) ||
                 (structure.structureType == STRUCTURE_TERMINAL &&
-                structure.store.energy < 10000));}});
-        // Find links
-        var links = room.find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_LINK}});
-        
+                _.sum(Game.rooms.E54N48.terminal.store) < 200000));}});
+
         mem.links_sinks = [];
         mem.links_sources = [];
-        //runLinks.assign(links);
-        
+
         mem.objectsSites = sites;
         mem.objectsPiles = piles;
         mem.objectsSinks = sinks;
@@ -59,7 +57,7 @@ var memoryRoomMine = {
         mem.joblistRepairContainers = [];
         mem.joblistRepairWalls = [];
         mem.joblistRepairRamps = [];
-        var defense = 100000;
+        var defense = 1000;
 
         // List of pickup jobs -----------------------------------------------
 
@@ -74,8 +72,8 @@ var memoryRoomMine = {
         //    }
         //}
         // Any dropped ressources 100+
-        var drops = (room.find(FIND_DROPPED_RESOURCES))//, {
-            //filter: {resourceType: RESOURCE_ENERGY}}))
+        var drops = (room.find(FIND_DROPPED_RESOURCES, {
+            filter: {resourceType: RESOURCE_ENERGY}}))
         if (drops.length) {
             for(var i = 0; i < drops.length; i++) {
                 var drop = drops[i]
@@ -96,19 +94,19 @@ var memoryRoomMine = {
                 }
             }
         }
-        
+
 
         // Run Links -----------------------------------------------------------
-        
-        //Links given my run.links
-        //var links = mem.links
-        //if (typeof links != 'undefined' &&
-        //    links.length) {
-        //    for(var link in links) {
-        //        thislink = Game.getObjectById(link)
-        //        mem.joblistPickup.push(thislink.id)
-        //    }
-        //}
+        // /*/*
+        // //Links given my run.links
+        // var links = mem.links
+        // if (typeof links != 'undefined' &&
+        //     links.length) {
+        //     for(var link in links) {
+        //         thislink = Game.getObjectById(link)
+        //         mem.joblistPickup.push(thislink.id)
+        //     }
+        // }
         // // Links if three links and link 3 full
         // var links = room.find(FIND_STRUCTURES, {
         //     filter: (structure) => {
@@ -116,14 +114,14 @@ var memoryRoomMine = {
         // if (links.length > 2 &&
         //     links[2].energy > 0 &&
         //     links[0].energy > 0) {
-        //     mem.jobs.pickups.push(links[0].id)
-        // }
-        // var storage = room.storage
-        // if (typeof storage !== 'undefined') {
-        //     if (storage.length > 0) {
-        //         mem.jobs.pickups.push(storage.id)
-        //     }
-        // }
+        //     mem.joblistPickup.push(links[0].id)
+        // }*/*/
+        var storage = room.storage
+        if (typeof storage !== 'undefined') {
+            if (storage.length > 0) {
+                mem.joblistPickup.push(storage.id)
+            }
+        }
 
 
         // List of upkeep jobs -----------------------------------------------
@@ -195,7 +193,7 @@ var memoryRoomMine = {
         var jobRoads = room.find(FIND_STRUCTURES, {
             filter: (structure) => {
                 return (structure.structureType == 'road' &&
-                structure.hits >= (structure.hitsMax - 500))}});
+                structure.hits >= (structure.hitsMax - 2000))}});
         for (j in jobRoads){
             if (_.some(joblist, jobRoads[j].id)) {
                 joblist.splice(joblist.indexOf(jobRoads[j]),1)
@@ -207,7 +205,7 @@ var memoryRoomMine = {
         var jobConts = room.find(FIND_STRUCTURES, {
             filter: (structure) => {
                 return (structure.structureType == 'container' &&
-                structure.hits >= (structure.hitsMax - 500))}});
+                structure.hits >= (structure.hitsMax - 2000))}});
         for (j in jobConts){
             if (_.some(joblist, jobConts[j].id)) {
                 joblist.splice(joblist.indexOf(jobConts[j]),1)
@@ -273,14 +271,14 @@ var memoryRoomMine = {
             popTarget['worker'] = nSources;
             popTarget['carrier'] = 2;
             popTarget['upgrader'] = 1;
-            
+
             // If there is a construction site, there should be a builder
             if (sites.length) {
                 popTarget['builder'] = 1;
             }
-            
+
             // If there is an extractor, there should be a miner
-            if (room.find(FIND_MY_STRUCTURES, { 
+            if (room.find(FIND_MY_STRUCTURES, {
                 filter: { structureType: STRUCTURE_EXTRACTOR}}).length) {
                 popTarget['miner'] = 1;
             }
@@ -288,10 +286,10 @@ var memoryRoomMine = {
 
 
         // Census of actual creep population -----------------------------------
-        
+
         // Get all creeps in this room
-        var creeps = _.filter(Game.creeps, function(o) { 
-            return o.room.name == room.name; 
+        var creeps = _.filter(Game.creeps, function(o) {
+            return o.room.name == room.name;
         });
         // Get number of creeps per role
         var pop = _.countBy(creeps, 'memory.role');
@@ -313,12 +311,12 @@ var memoryRoomMine = {
 
 
         // Restart room ========================================================
-        if (pop['generalist'] === 0 && 
+        if (pop['generalist'] < 4 &&
             pop['carrier'] === 0) {
             var spawns = room.find(FIND_MY_STRUCTURES, {filter: {structureType: STRUCTURE_SPAWN}});
             if (spawns.length) {
                 var spawn = _.sortByOrder(spawns, 'energy', 'desc')[0];
-                
+
                 if (room.energyCapacityAvailable <= 800) {
                     spawn.spawnGeneralist(spawn.room.energyAvailable)
                 }
