@@ -8,7 +8,7 @@ module.exports = {
 
         // Task switch  --------------------------------------------------------
         if (creep.room.name === creep.memory.operation) {
-            
+
             if (creep.carry.energy === 0 &&
                 creep.memory.task !== 'harvest') {
                 creep.memory.task = 'harvest';
@@ -55,35 +55,35 @@ module.exports = {
                 creep.memory.task === 'harvest') {
                 // Select sources
                 var sources = mem.sources
-                if (sources.length) {
-                    var source = _.sortBy(sources, 'work', 'desc')[0].id;
-                    creep.memory.target = source;
-                }
+                var source = _.sortBy(sources, 'work', 'desc')[0];
+                creep.memory.target = source.id;
             }
-            
+
             else if (creep.memory.target === '' &&
                 creep.memory.task === 'deliver') {
                 //take task from memory
             }
-    
+
             else if (creep.memory.target === '' &&
                 creep.memory.task === 'build') {
                 //take task from memory
             }
-    
+
             // Block target --------------------------------------------------------
             if (creep.memory.task === 'harvest') {
                 // Find target source
                 var source = Game.getObjectById(creep.memory.target)
                 // Substract from source budget
                 var sourceIndex = _.findIndex(mem.sources, {'id': creep.memory.target});
-                var slots = mem.sources[sourceIndex]['slots'];
-                var work = mem.sources[sourceIndex]['work'];
-                var parts = _.filter(creep.body, {'type': WORK}).length
-                mem.sources[sourceIndex]['slots'] = slots - 1;
-                // Only count half the work parts for Generalists
-                // Because the mining will be interrupted by delivering
-                mem.sources[sourceIndex]['work'] = work - parts / 2;
+                if (mem.sources[sourceIndex] !== undefined) {
+                    var slots = mem.sources[sourceIndex]['slots'];
+                    var work = mem.sources[sourceIndex]['work'];
+                    var parts = _.filter(creep.body, {'type': WORK}).length
+                    mem.sources[sourceIndex]['slots'] = slots - 1;
+                    // Only count half the work parts for Generalists
+                    // Because the mining will be interrupted by delivering
+                    mem.sources[sourceIndex]['work'] = work - parts / 2;
+                }
             }
             else if (creep.memory.task === 'deliver') {
                 //remove target from delivery list
@@ -101,17 +101,17 @@ module.exports = {
         var mem = Memory.rooms[creep.room.name];
 
         // Execute tasks =======================================================
-        
+
         if (creep.memory.task === 'migrate') {
             creep.moveTo(Game.getObjectById(creep.memory.target));
         }
-        
+
         // Harvesting ----------------------------------------------------------
         if (creep.memory.task === 'harvest') {
 
             // Find target
             var source = Game.getObjectById(creep.memory.target);
-            
+
             var pickups = mem.joblistPickup
             if (pickups.length) {
                 // Temporary workaround... should be
@@ -137,7 +137,7 @@ module.exports = {
                     }
                 }
             }
-            
+
             // Do the work
             else if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(source);

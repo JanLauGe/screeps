@@ -25,7 +25,7 @@ module.exports = {
 
         // Execute tasks =======================================================
         if (creep.memory.task === 'loading') {
-            
+
             var allJobs = [];
             for (i = 0; i < mem.joblistPickup.length; i++){
                 allJobs.push(Game.getObjectById(mem.joblistPickup[i]));
@@ -75,7 +75,7 @@ module.exports = {
             //    }
             //});
             var sinks = mem.objectsSinks
-            
+
             //var towers = creep.room.find(FIND_STRUCTURES, {
             //    filter: (structure) => {
             //        return (structure.structureType == STRUCTURE_TOWER &&
@@ -97,7 +97,8 @@ module.exports = {
 
 
             // Deliver to sinks
-            if (sinks.length > 0) {
+            if (sinks !== undefined &&
+                sinks.length > 0) {
                 // Keep this for fast dropoff on the road
                 //creep.transfer(creep.pos.findInRange(FIND_STRUCTURES, {
                 //    filter: (structure) => {

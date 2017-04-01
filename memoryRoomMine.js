@@ -249,22 +249,22 @@ var memoryRoomMine = {
         if (room.energyCapacityAvailable <= 300) {
             popTarget['generalist'] = Math.min(
                 Math.floor(slots * 1.5),
-                nSources * 5);
+                nSources * 1); //5
         }
         else if (room.energyCapacityAvailable <= 400) {
             popTarget['generalist'] = Math.min(
                 Math.floor(slots * 1.5),
-                nSources * 3);
+                nSources * 1); //3
         }
         else if (room.energyCapacityAvailable <= 600) {
             popTarget['generalist'] = Math.min(
                 Math.floor(slots * 1.5),
-                nSources * 2);
+                nSources * 1); //2
         }
         else if (room.energyCapacityAvailable <= 800) {
             popTarget['generalist'] = Math.min(
                 Math.floor(slots * 1.5),
-                nSources * 1.5);
+                nSources * 1); //1.5
         }
         // Else, user worker carrier model
         else if (room.energyCapacityAvailable > 800) {

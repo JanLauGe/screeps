@@ -189,7 +189,7 @@ module.exports = {
                             spawn.room.controller != undefined &&
                             spawn.room.controller.owner != undefined &&
                             spawn.room.controller.owner.username === 'JanLauGe' &&
-                            spawn.room.controller.level > 3) {
+                            spawn.room.controller.level > 6) {
                             var distanceToSpawn = thisDistance;
                             var closestSpawn = Game.spawns[j];
                         }
